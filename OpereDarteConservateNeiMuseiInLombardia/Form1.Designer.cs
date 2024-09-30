@@ -28,21 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.grigliaOpere = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.grigliaOpere)).BeginInit();
             this.SuspendLayout();
+            // 
+            // grigliaOpere
+            // 
+            this.grigliaOpere.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grigliaOpere.Location = new System.Drawing.Point(18, 39);
+            this.grigliaOpere.Name = "grigliaOpere";
+            this.grigliaOpere.Size = new System.Drawing.Size(1447, 579);
+            this.grigliaOpere.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1477, 643);
+            this.Controls.Add(this.grigliaOpere);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.grigliaOpere)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridView grigliaOpere;
     }
 }
 
