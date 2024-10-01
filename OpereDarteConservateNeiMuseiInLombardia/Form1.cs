@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.Json;
 
 namespace OpereDarteConservateNeiMuseiInLombardia
 {
@@ -17,13 +18,12 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         public Form1()
         {
             InitializeComponent();
-            catalogo.Leggi();
+            catalogo.LeggiJSON();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            catalogo.opere.Add(new Opera());
             grigliaOpere.DataSource = catalogo.opere;
         }
     }
