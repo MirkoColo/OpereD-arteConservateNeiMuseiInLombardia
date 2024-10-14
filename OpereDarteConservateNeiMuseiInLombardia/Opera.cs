@@ -24,9 +24,6 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         // SGTI: Soggetto dell'opera
         private string SGTI;
 
-        // PVCS: Paese di origine
-        private string PVCS;
-
         // PVCP: Provincia di origine
         private string PVCP;
 
@@ -57,17 +54,11 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         // DTZG: Datazione dell'opera (secolo)
         private string DTZG;
 
-        // DTZS: Datazione dell'opera (specifica)
-        private string DTZS;
-
         // DTSI: Anno di creazione dell'opera
         private int DTSI;
 
         // AUTN: Nome dell'autore dell'opera
         private string AUTN;
-
-        // AUTA: Note sull'autore o sull'opera
-        private string AUTA;
 
         // ATBD: Categoria o tipo di arte
         private string ATBD;
@@ -97,7 +88,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         private double GPDPY;
 
         // location: Coordinate geografiche (latitudine, longitudine)
-        private (double Latitude, double Longitude) location;
+        private string location;
 
         // URL: Link per accedere a ulteriori informazioni sull'opera
         private string URL;
@@ -131,12 +122,6 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         {
             get { return SGTI; }
             set { SGTI = value; }
-        }
-
-        public string Pvcs
-        {
-            get { return PVCS; }
-            set { PVCS = value; }
         }
 
         public string Pvcp
@@ -199,12 +184,6 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             set { DTZG = value; }
         }
 
-        public string Dtzs
-        {
-            get { return DTZS; }
-            set { DTZS = value; }
-        }
-
         public int Dtsi
         {
             get { return DTSI; }
@@ -215,12 +194,6 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         {
             get { return AUTN; }
             set { AUTN = value; }
-        }
-
-        public string Auta
-        {
-            get { return AUTA; }
-            set { AUTA = value; }
         }
 
         public string Atbd
@@ -277,7 +250,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             set { GPDPY = value; }
         }
 
-        public (double Latitude, double Longitude) Location
+        public string Location
         {
             get { return location; }
             set { location = value; }
