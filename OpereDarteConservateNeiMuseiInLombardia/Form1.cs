@@ -46,6 +46,8 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             //grigliaOpere.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             grigliaOpere.ReadOnly = true;
             gmap.Visible = false;
+            webBrowser.Visible = false;
+
             InitializeMap();
         }
 
@@ -66,17 +68,9 @@ namespace OpereDarteConservateNeiMuseiInLombardia
 
         private void btn_cercaOperaPerAutore_Click(object sender, EventArgs e)
         {
-            int risultato = catalogo.CercaOperaPerAutore();
-            if (risultato != -1)
-            {
-                MessageBox.Show("Opera trovata all'indice: " + risultato);
-                grigliaOpere.ClearSelection();
-                grigliaOpere.FirstDisplayedScrollingRowIndex = risultato;
-            }
-            else
-            {
-                MessageBox.Show("Opera non trovata.");
-            }
+            grigliaOpere.DataSource = catalogo.CercaOperaPerAutore();
+            MostraGriglia();
+
         }
 
         private void btn_cercaOperaPerID_Click(object sender, EventArgs e)
@@ -86,7 +80,9 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             {
                 MessageBox.Show("Opera trovata all'indice: " + risultato);
                 grigliaOpere.ClearSelection();
+                grigliaOpere.Rows[risultato].Selected = true;
                 grigliaOpere.FirstDisplayedScrollingRowIndex = risultato;
+                MostraGriglia();
             }
             else
             {
@@ -96,22 +92,42 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         private void btn_CercaOperaPerDescrizione_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.CercaOperaPerDescrizione();
+            MostraGriglia();
+        }
+
+        private void btn_cercaImmagine_Click(object sender, EventArgs e)
+        {
+            int risultato = catalogo.CercaImmagine();
+            if (risultato != -1)
+            {
+                string url = catalogo.opere[risultato].Url;
+                webBrowser.Navigate(url);
+                webBrowser.Visible = true;
+                MostraGriglia();
+            }
+            else
+            {
+                MessageBox.Show("Opera non trovata.");
+            }
         }
 
         private void btn_filtraOperePerTipologia_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.FiltraPerTipologia();
+            MostraGriglia();
         }
 
         private void btn_filtraPerSecolo_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.FiltraPerSecolo();
+            MostraGriglia();
         }
 
         private void btn_filtraPerMuseo_Click(object sender, EventArgs e)
         {
             
-            grigliaOpere.DataSource = catalogo.FiltraPerMuseo(); 
+            grigliaOpere.DataSource = catalogo.FiltraPerMuseo();
+            MostraGriglia();
 
         }
 
@@ -141,37 +157,39 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         private void btn_caricaCatalogo_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.opere;
+            grigliaOpere.Visible = true;
+
         }
 
         private void btn_filtraPerGruppo_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.FiltraPerGruppo();
-
+            MostraGriglia();
         }
 
         private void btn_filtraPerComune_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.FiltraPerComune();
-
+            MostraGriglia();
         }
 
         private void btn_filtraPerProvincia_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.FiltraPerProvincia();
-
+            MostraGriglia();
         }
 
 
         private void btn_filtraPerEnte_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.FiltraPerEnte();
-
+            MostraGriglia();
         }
 
         private void btn_filtraPerTipoDiEdificio_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.FiltraPerTipoDiEdificio();
-
+            MostraGriglia();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -215,81 +233,35 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         private void btn_filtraPerStatoDiConservazione_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.FiltraPerStatoDiConservazione();
+            MostraGriglia();
         }
 
         private void btn_filtraPerProprieta_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.FiltraPerProprieta();
+            MostraGriglia();
 
         }
 
         private void btn_filtraPerMateriale_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.FiltraPerMateriale();
+            MostraGriglia();
         }
 
         private void btn_filtraPerFornitore_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.FiltraPerFornitore();
+            MostraGriglia();
         }
 
         private void btn_cercaOperaPerSoggetto_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.CercaOperaPerSoggetto();
+            MostraGriglia();
 
         }
 
-        private void LoadMapWithMarkers()
-        {
-            // Costruisci HTML e JavaScript per Google Maps con 200 marker
-            var sb = new StringBuilder();
-            sb.Append(@"
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Google Maps con Marker</title>
-                    <script src='https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY'></script>
-                    <script>
-                        function initMap() {
-                            const map = new google.maps.Map(document.getElementById('map'), {
-                                center: { lat: 45.4654219, lng: 12.4964 }, // Centro su Roma, per esempio
-                                zoom: 5
-                            });
-
-                            const markers = [
-            ");
-
-            // Genera 200 marker casuali
-            var random = new Random();
-            for (int i = 0; i < 200; i++)
-            {
-                double lat = 41.0 + random.NextDouble(); // Latitudine casuale vicino a Roma
-                double lng = 12.0 + random.NextDouble(); // Longitudine casuale vicino a Roma
-                string title = $"Marker {i + 1}";
-
-                sb.Append($@"{{ lat: {lat}, lng: {lng}, title: '{title}' }},");
-            }
-
-            sb.Append(@"];
-                            markers.forEach(markerData => {
-                                new google.maps.Marker({
-                                    position: { lat: markerData.lat, lng: markerData.lng },
-                                    map: map,
-                                    title: markerData.title
-                                });
-                            });
-                        }
-                    </script>
-                </head>
-                <body onload='initMap()'>
-                    <div id='map' style='width: 100%; height: 100%;'></div>
-                </body>
-                </html>
-            ");
-
-            // Carica il contenuto HTML nel controllo WebBrowser
-            webBrowser.DocumentText = sb.ToString();
-        }
         private void InitializeMap()
         {
             // Imposta il provider della mappa
@@ -300,7 +272,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
 
             // Imposta zoom
             gmap.MinZoom = 2;
-            gmap.MaxZoom = 18;
+            gmap.MaxZoom = 20;
             gmap.Zoom = 10;
 
             // Abilita lo zoom tramite mouse
@@ -366,13 +338,43 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             if(gmap.Visible)
             {
                 gmap.Visible = false;
+                webBrowser.Visible = false;
+                grigliaOpere.Visible = true;
             }
             else
             {
                 gmap.Visible = true;
+                webBrowser.Visible = false;
+                grigliaOpere.Visible = false;
             }
         }
 
-        
+        public void MostraGriglia()
+        {
+            if(gmap.Visible == true || webBrowser.Visible == true)
+            {
+                gmap.Visible = false;
+                webBrowser.Visible = false;
+                grigliaOpere.Visible = true;
+            }
+        }
+
+        private void btn_cercaMuseo_Click(object sender, EventArgs e)
+        {
+            int risultato = catalogo.CercaMuseo();
+            if (risultato != -1)
+            {
+                //MessageBox.Show("Opera trovata all'indice: " + risultato);
+                gmap.Position = ConvertiCoordinate(catalogo.opere[risultato].Location);
+                gmap.Zoom = 18;
+                gmap.Visible = true;
+                grigliaOpere.Visible = false;
+                webBrowser.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show("Opera non trovata.");
+            }
+        }
     }
 }

@@ -92,12 +92,11 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             return risultato;
         }
 
-        public int CercaOperaPerAutore()
+        public List<Opera> CercaOperaPerAutore()
         {
             string autore = ShowInputBox("Inserisci l'autore dell'opera", "Inserimento autore opera", "");
-            int risultato = Ricerca(autore, "Autn");
+            return Ricercas(autore,"Autn");
 
-            return risultato;
         }
 
         public List<Opera> CercaOperaPerDescrizione()
@@ -113,22 +112,40 @@ namespace OpereDarteConservateNeiMuseiInLombardia
 
             return Ricercas(soggetto, "Sgti");
         }
+
+        public int CercaImmagine()
+        {
+            string opera = ShowInputBox("Inserisci il nome dell'opera", "Inserimento opera", "");
+            int risultato = Ricerca(opera, "Idk");
+
+            return risultato;
+        }
+
+        public int CercaMuseo()
+        {
+            string museo = ShowInputBox("Inserisci il nome del museo", "Inserimento museo", "");
+            int risultato = Ricerca(museo, "Esc");
+
+            return risultato;
+        }
         public int Ricerca(string opera, string sigla)
         {
             int i;
-            for (i = 0; i < opere.Count; i++)
+            if (opera != "")
             {
-                var tipo = opere[i].GetType();  // Ottieni il tipo dell'oggetto
-                var proprieta = tipo.GetProperty(sigla);  // Ottieni la proprietà
-                var valoreProprieta = proprieta.GetValue(opere[i])?.ToString();  // Ottieni il valore della proprietà come stringa
-                if (valoreProprieta == opera)
+                for (i = 0; i < opere.Count; i++)
                 {
-                    return i;
-                }   
+                    var tipo = opere[i].GetType();  // Ottieni il tipo dell'oggetto
+                    var proprieta = tipo.GetProperty(sigla);  // Ottieni la proprietà
+                    var valoreProprieta = proprieta.GetValue(opere[i])?.ToString();  // Ottieni il valore della proprietà come stringa
+                    if (valoreProprieta == opera)
+                    {
+                        return i;
+                    }
+                }
             }
-
-            return -1;
-
+                return -1;
+           
         }
 
         public List<Opera> Ricercas(string opera, string sigla)
@@ -253,6 +270,8 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             }
 
         }
+
+
         public string ShowInputBox(string prompt, string title = "Input", string defaultValue = "")
         {
             // Disabilita temporaneamente TopMost

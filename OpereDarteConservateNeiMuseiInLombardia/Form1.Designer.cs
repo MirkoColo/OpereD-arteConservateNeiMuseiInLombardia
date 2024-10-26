@@ -35,6 +35,7 @@
             this.btn_cercaOperaPerID = new System.Windows.Forms.Button();
             this.btn_cercaOperaPerAutore = new System.Windows.Forms.Button();
             this.pnl_bottoni = new System.Windows.Forms.Panel();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.btn_filtraPerFornitore = new System.Windows.Forms.Button();
             this.btn_filtraPerMateriale = new System.Windows.Forms.Button();
             this.btn_filtraPerProprieta = new System.Windows.Forms.Button();
@@ -52,7 +53,8 @@
             this.btn_cercaOperaPerSoggetto = new System.Windows.Forms.Button();
             this.gmap = new GMap.NET.WindowsForms.GMapControl();
             this.btn_mappa = new System.Windows.Forms.Button();
-            this.webBrowser = new System.Windows.Forms.WebBrowser();
+            this.btn_cercaImmagine = new System.Windows.Forms.Button();
+            this.btn_cercaMuseo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grigliaOpere)).BeginInit();
             this.pnl_bottoni.SuspendLayout();
             this.SuspendLayout();
@@ -114,7 +116,6 @@
             // 
             // pnl_bottoni
             // 
-            this.pnl_bottoni.Controls.Add(this.webBrowser);
             this.pnl_bottoni.Controls.Add(this.btn_filtraPerFornitore);
             this.pnl_bottoni.Controls.Add(this.btn_filtraPerMateriale);
             this.pnl_bottoni.Controls.Add(this.btn_filtraPerProprieta);
@@ -134,6 +135,14 @@
             this.pnl_bottoni.TabIndex = 6;
             this.pnl_bottoni.Visible = false;
             this.pnl_bottoni.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_bottoni_Paint);
+            // 
+            // webBrowser
+            // 
+            this.webBrowser.Location = new System.Drawing.Point(404, 14);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.Size = new System.Drawing.Size(1519, 1039);
+            this.webBrowser.TabIndex = 13;
             // 
             // btn_filtraPerFornitore
             // 
@@ -337,13 +346,27 @@
             this.btn_mappa.UseVisualStyleBackColor = true;
             this.btn_mappa.Click += new System.EventHandler(this.btn_mappa_Click);
             // 
-            // webBrowser
+            // btn_cercaImmagine
             // 
-            this.webBrowser.Location = new System.Drawing.Point(-11, 143);
-            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(417, 194);
-            this.webBrowser.TabIndex = 13;
+            this.btn_cercaImmagine.Location = new System.Drawing.Point(12, 343);
+            this.btn_cercaImmagine.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_cercaImmagine.Name = "btn_cercaImmagine";
+            this.btn_cercaImmagine.Size = new System.Drawing.Size(384, 53);
+            this.btn_cercaImmagine.TabIndex = 14;
+            this.btn_cercaImmagine.Text = "Cerca immagine dell\'opera";
+            this.btn_cercaImmagine.UseVisualStyleBackColor = true;
+            this.btn_cercaImmagine.Click += new System.EventHandler(this.btn_cercaImmagine_Click);
+            // 
+            // btn_cercaMuseo
+            // 
+            this.btn_cercaMuseo.Location = new System.Drawing.Point(13, 404);
+            this.btn_cercaMuseo.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_cercaMuseo.Name = "btn_cercaMuseo";
+            this.btn_cercaMuseo.Size = new System.Drawing.Size(384, 53);
+            this.btn_cercaMuseo.TabIndex = 15;
+            this.btn_cercaMuseo.Text = "Cerca museo sulla mappa";
+            this.btn_cercaMuseo.UseVisualStyleBackColor = true;
+            this.btn_cercaMuseo.Click += new System.EventHandler(this.btn_cercaMuseo_Click);
             // 
             // Form1
             // 
@@ -351,17 +374,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.Controls.Add(this.pnl_bottoni);
+            this.Controls.Add(this.btn_cercaMuseo);
+            this.Controls.Add(this.btn_cercaImmagine);
             this.Controls.Add(this.btn_mappa);
-            this.Controls.Add(this.gmap);
             this.Controls.Add(this.btn_cercaOperaPerSoggetto);
             this.Controls.Add(this.btn_CercaOperaPerDescrizione);
-            this.Controls.Add(this.pnl_bottoni);
             this.Controls.Add(this.btn_caricaCatalogo);
             this.Controls.Add(this.btn_cercaOperaPerAutore);
             this.Controls.Add(this.btn_cercaOperaPerID);
             this.Controls.Add(this.btn_filtri);
             this.Controls.Add(this.btn_ricerche);
+            this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.grigliaOpere);
+            this.Controls.Add(this.gmap);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -400,6 +426,8 @@
         private GMap.NET.WindowsForms.GMapControl gmap;
         private System.Windows.Forms.Button btn_mappa;
         private System.Windows.Forms.WebBrowser webBrowser;
+        private System.Windows.Forms.Button btn_cercaImmagine;
+        private System.Windows.Forms.Button btn_cercaMuseo;
     }
 }
 
