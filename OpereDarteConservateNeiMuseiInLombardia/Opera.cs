@@ -39,7 +39,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         // LDCQ: Tipo di ente o ente pubblico
         private string LDCQ;
 
-        // LDCN: Nome dell'edificio o del luogo
+        // LDCN: Nome dell'edificio
         private string LDCN;
 
         // LDCU: Indirizzo dell'edificio
@@ -60,7 +60,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         // AUTN: Nome dell'autore dell'opera
         private string AUTN;
 
-        // ATBD: Categoria o tipo di arte
+        // ATBD: Categoria
         private string ATBD;
 
         // MTC: Materiale utilizzato per l'opera
@@ -78,7 +78,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         // CDGG: Proprietà dell'opera
         private string CDGG;
 
-        // FUR: Nome del fornitore o dell'artista
+        // FUR: Nome del fornitore
         private string FUR;
 
         // GPDPX: Coordinate X della posizione
