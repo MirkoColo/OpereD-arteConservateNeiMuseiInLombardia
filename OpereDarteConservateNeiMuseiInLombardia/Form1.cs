@@ -14,6 +14,7 @@ using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms;
 using GMap.NET;
+using System.Security.Policy;
 
 namespace OpereDarteConservateNeiMuseiInLombardia
 {
@@ -103,7 +104,6 @@ namespace OpereDarteConservateNeiMuseiInLombardia
                 string url = catalogo.opere[risultato].Url;
                 webBrowser.Navigate(url);
                 webBrowser.Visible = true;
-                MostraGriglia();
             }
             else
             {
@@ -157,6 +157,8 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         private void btn_caricaCatalogo_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.opere;
+            gmap.Visible = false;
+            webBrowser.Visible = false;
             grigliaOpere.Visible = true;
 
         }
@@ -302,7 +304,10 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             for (int i = 0; i < catalogoSenzaDuplicati.Count; i++)
             {
                 var marker = new GMarkerGoogle(ConvertiCoordinate(catalogoSenzaDuplicati[i].Location), GMarkerGoogleType.red_dot);
-                markersOverlay.Markers.Add(marker);
+                if (marker.Position.Lat != 0 && marker.Position.Lng != 0)
+                {
+                    markersOverlay.Markers.Add(marker);
+                }
             }
             gmap.Overlays.Add(markersOverlay);
 
@@ -374,6 +379,29 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             else
             {
                 MessageBox.Show("Opera non trovata.");
+            }
+        }
+
+        private void btn_cercaEventi_Click(object sender, EventArgs e)
+        {
+            webBrowser.Navigate("https://www.musei.regione.lombardia.it/wps/portal/site/musei-riconosciuti-in-lombardia/eventi-e-novita");
+            webBrowser.Visible = true;
+        }
+
+        private void btn_mostraBrowser_Click(object sender, EventArgs e)
+        {
+
+            if (webBrowser.Visible)
+            {
+                gmap.Visible = false;
+                webBrowser.Visible = false;
+                grigliaOpere.Visible = true;
+            }
+            else
+            {
+                gmap.Visible = false;
+                webBrowser.Visible = true;
+                grigliaOpere.Visible = false;
             }
         }
     }

@@ -115,7 +115,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
 
         public int CercaImmagine()
         {
-            string opera = ShowInputBox("Inserisci il nome dell'opera", "Inserimento opera", "");
+            string opera = ShowInputBox("Inserisci l'ID dell'opera", "Inserimento ID", "");
             int risultato = Ricerca(opera, "Idk");
 
             return risultato;

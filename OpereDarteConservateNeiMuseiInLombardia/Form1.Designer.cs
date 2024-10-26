@@ -55,6 +55,8 @@
             this.btn_mappa = new System.Windows.Forms.Button();
             this.btn_cercaImmagine = new System.Windows.Forms.Button();
             this.btn_cercaMuseo = new System.Windows.Forms.Button();
+            this.btn_cercaEventi = new System.Windows.Forms.Button();
+            this.btn_mostraBrowser = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grigliaOpere)).BeginInit();
             this.pnl_bottoni.SuspendLayout();
             this.SuspendLayout();
@@ -97,7 +99,7 @@
             this.btn_cercaOperaPerID.Location = new System.Drawing.Point(12, 100);
             this.btn_cercaOperaPerID.Margin = new System.Windows.Forms.Padding(4);
             this.btn_cercaOperaPerID.Name = "btn_cercaOperaPerID";
-            this.btn_cercaOperaPerID.Size = new System.Drawing.Size(384, 53);
+            this.btn_cercaOperaPerID.Size = new System.Drawing.Size(376, 53);
             this.btn_cercaOperaPerID.TabIndex = 3;
             this.btn_cercaOperaPerID.Text = "Cerca opera per ID";
             this.btn_cercaOperaPerID.UseVisualStyleBackColor = true;
@@ -108,7 +110,7 @@
             this.btn_cercaOperaPerAutore.Location = new System.Drawing.Point(12, 160);
             this.btn_cercaOperaPerAutore.Margin = new System.Windows.Forms.Padding(4);
             this.btn_cercaOperaPerAutore.Name = "btn_cercaOperaPerAutore";
-            this.btn_cercaOperaPerAutore.Size = new System.Drawing.Size(384, 53);
+            this.btn_cercaOperaPerAutore.Size = new System.Drawing.Size(376, 53);
             this.btn_cercaOperaPerAutore.TabIndex = 4;
             this.btn_cercaOperaPerAutore.Text = "Cerca opera per autore";
             this.btn_cercaOperaPerAutore.UseVisualStyleBackColor = true;
@@ -128,7 +130,7 @@
             this.pnl_bottoni.Controls.Add(this.btn_filtraPerMuseo);
             this.pnl_bottoni.Controls.Add(this.btn_filtraPerSecolo);
             this.pnl_bottoni.Controls.Add(this.btn_filtraOperePerTipologia);
-            this.pnl_bottoni.Location = new System.Drawing.Point(9, 87);
+            this.pnl_bottoni.Location = new System.Drawing.Point(12, 87);
             this.pnl_bottoni.Margin = new System.Windows.Forms.Padding(4);
             this.pnl_bottoni.Name = "pnl_bottoni";
             this.pnl_bottoni.Size = new System.Drawing.Size(387, 898);
@@ -146,10 +148,10 @@
             // 
             // btn_filtraPerFornitore
             // 
-            this.btn_filtraPerFornitore.Location = new System.Drawing.Point(4, 677);
+            this.btn_filtraPerFornitore.Location = new System.Drawing.Point(-1, 683);
             this.btn_filtraPerFornitore.Margin = new System.Windows.Forms.Padding(4);
             this.btn_filtraPerFornitore.Name = "btn_filtraPerFornitore";
-            this.btn_filtraPerFornitore.Size = new System.Drawing.Size(379, 53);
+            this.btn_filtraPerFornitore.Size = new System.Drawing.Size(378, 53);
             this.btn_filtraPerFornitore.TabIndex = 18;
             this.btn_filtraPerFornitore.Text = "Filtra per fornitore";
             this.btn_filtraPerFornitore.UseVisualStyleBackColor = true;
@@ -157,10 +159,10 @@
             // 
             // btn_filtraPerMateriale
             // 
-            this.btn_filtraPerMateriale.Location = new System.Drawing.Point(4, 436);
+            this.btn_filtraPerMateriale.Location = new System.Drawing.Point(0, 500);
             this.btn_filtraPerMateriale.Margin = new System.Windows.Forms.Padding(4);
             this.btn_filtraPerMateriale.Name = "btn_filtraPerMateriale";
-            this.btn_filtraPerMateriale.Size = new System.Drawing.Size(379, 53);
+            this.btn_filtraPerMateriale.Size = new System.Drawing.Size(377, 53);
             this.btn_filtraPerMateriale.TabIndex = 17;
             this.btn_filtraPerMateriale.Text = "Filtra per materiale";
             this.btn_filtraPerMateriale.UseVisualStyleBackColor = true;
@@ -168,10 +170,10 @@
             // 
             // btn_filtraPerProprieta
             // 
-            this.btn_filtraPerProprieta.Location = new System.Drawing.Point(4, 616);
+            this.btn_filtraPerProprieta.Location = new System.Drawing.Point(-1, 622);
             this.btn_filtraPerProprieta.Margin = new System.Windows.Forms.Padding(4);
             this.btn_filtraPerProprieta.Name = "btn_filtraPerProprieta";
-            this.btn_filtraPerProprieta.Size = new System.Drawing.Size(379, 53);
+            this.btn_filtraPerProprieta.Size = new System.Drawing.Size(378, 53);
             this.btn_filtraPerProprieta.TabIndex = 16;
             this.btn_filtraPerProprieta.Text = "Filtra per proprietà";
             this.btn_filtraPerProprieta.UseVisualStyleBackColor = true;
@@ -179,10 +181,10 @@
             // 
             // btn_filtraPerStatoDiConservazione
             // 
-            this.btn_filtraPerStatoDiConservazione.Location = new System.Drawing.Point(4, 375);
+            this.btn_filtraPerStatoDiConservazione.Location = new System.Drawing.Point(1, 439);
             this.btn_filtraPerStatoDiConservazione.Margin = new System.Windows.Forms.Padding(4);
             this.btn_filtraPerStatoDiConservazione.Name = "btn_filtraPerStatoDiConservazione";
-            this.btn_filtraPerStatoDiConservazione.Size = new System.Drawing.Size(379, 53);
+            this.btn_filtraPerStatoDiConservazione.Size = new System.Drawing.Size(376, 53);
             this.btn_filtraPerStatoDiConservazione.TabIndex = 15;
             this.btn_filtraPerStatoDiConservazione.Text = "Filtra per stato di conservazione";
             this.btn_filtraPerStatoDiConservazione.UseVisualStyleBackColor = true;
@@ -190,10 +192,10 @@
             // 
             // btn_filtraPerEnte
             // 
-            this.btn_filtraPerEnte.Location = new System.Drawing.Point(4, 555);
+            this.btn_filtraPerEnte.Location = new System.Drawing.Point(-1, 561);
             this.btn_filtraPerEnte.Margin = new System.Windows.Forms.Padding(4);
             this.btn_filtraPerEnte.Name = "btn_filtraPerEnte";
-            this.btn_filtraPerEnte.Size = new System.Drawing.Size(379, 53);
+            this.btn_filtraPerEnte.Size = new System.Drawing.Size(378, 53);
             this.btn_filtraPerEnte.TabIndex = 14;
             this.btn_filtraPerEnte.Text = "Filtra per ente";
             this.btn_filtraPerEnte.UseVisualStyleBackColor = true;
@@ -201,10 +203,10 @@
             // 
             // btn_filtraPerTipoDiEdificio
             // 
-            this.btn_filtraPerTipoDiEdificio.Location = new System.Drawing.Point(4, 314);
+            this.btn_filtraPerTipoDiEdificio.Location = new System.Drawing.Point(0, 378);
             this.btn_filtraPerTipoDiEdificio.Margin = new System.Windows.Forms.Padding(4);
             this.btn_filtraPerTipoDiEdificio.Name = "btn_filtraPerTipoDiEdificio";
-            this.btn_filtraPerTipoDiEdificio.Size = new System.Drawing.Size(379, 53);
+            this.btn_filtraPerTipoDiEdificio.Size = new System.Drawing.Size(377, 53);
             this.btn_filtraPerTipoDiEdificio.TabIndex = 13;
             this.btn_filtraPerTipoDiEdificio.Text = "Filtra per tipo di edificio";
             this.btn_filtraPerTipoDiEdificio.UseVisualStyleBackColor = true;
@@ -212,10 +214,10 @@
             // 
             // btn_filtraPerProvincia
             // 
-            this.btn_filtraPerProvincia.Location = new System.Drawing.Point(4, 497);
+            this.btn_filtraPerProvincia.Location = new System.Drawing.Point(0, 317);
             this.btn_filtraPerProvincia.Margin = new System.Windows.Forms.Padding(4);
             this.btn_filtraPerProvincia.Name = "btn_filtraPerProvincia";
-            this.btn_filtraPerProvincia.Size = new System.Drawing.Size(379, 53);
+            this.btn_filtraPerProvincia.Size = new System.Drawing.Size(377, 53);
             this.btn_filtraPerProvincia.TabIndex = 12;
             this.btn_filtraPerProvincia.Text = "Filtra per provincia";
             this.btn_filtraPerProvincia.UseVisualStyleBackColor = true;
@@ -223,10 +225,10 @@
             // 
             // btn_filtraPerComune
             // 
-            this.btn_filtraPerComune.Location = new System.Drawing.Point(4, 256);
+            this.btn_filtraPerComune.Location = new System.Drawing.Point(0, 256);
             this.btn_filtraPerComune.Margin = new System.Windows.Forms.Padding(4);
             this.btn_filtraPerComune.Name = "btn_filtraPerComune";
-            this.btn_filtraPerComune.Size = new System.Drawing.Size(379, 53);
+            this.btn_filtraPerComune.Size = new System.Drawing.Size(377, 53);
             this.btn_filtraPerComune.TabIndex = 11;
             this.btn_filtraPerComune.Text = "Filtra per comune";
             this.btn_filtraPerComune.UseVisualStyleBackColor = true;
@@ -234,10 +236,10 @@
             // 
             // btn_filtraPerGruppo
             // 
-            this.btn_filtraPerGruppo.Location = new System.Drawing.Point(3, 195);
+            this.btn_filtraPerGruppo.Location = new System.Drawing.Point(0, 195);
             this.btn_filtraPerGruppo.Margin = new System.Windows.Forms.Padding(4);
             this.btn_filtraPerGruppo.Name = "btn_filtraPerGruppo";
-            this.btn_filtraPerGruppo.Size = new System.Drawing.Size(380, 53);
+            this.btn_filtraPerGruppo.Size = new System.Drawing.Size(377, 53);
             this.btn_filtraPerGruppo.TabIndex = 10;
             this.btn_filtraPerGruppo.Text = "Filtra per gruppo";
             this.btn_filtraPerGruppo.UseVisualStyleBackColor = true;
@@ -245,10 +247,10 @@
             // 
             // btn_filtraPerMuseo
             // 
-            this.btn_filtraPerMuseo.Location = new System.Drawing.Point(3, 134);
+            this.btn_filtraPerMuseo.Location = new System.Drawing.Point(0, 134);
             this.btn_filtraPerMuseo.Margin = new System.Windows.Forms.Padding(4);
             this.btn_filtraPerMuseo.Name = "btn_filtraPerMuseo";
-            this.btn_filtraPerMuseo.Size = new System.Drawing.Size(380, 53);
+            this.btn_filtraPerMuseo.Size = new System.Drawing.Size(377, 53);
             this.btn_filtraPerMuseo.TabIndex = 9;
             this.btn_filtraPerMuseo.Text = "Filtra per museo";
             this.btn_filtraPerMuseo.UseVisualStyleBackColor = true;
@@ -256,10 +258,10 @@
             // 
             // btn_filtraPerSecolo
             // 
-            this.btn_filtraPerSecolo.Location = new System.Drawing.Point(2, 73);
+            this.btn_filtraPerSecolo.Location = new System.Drawing.Point(0, 73);
             this.btn_filtraPerSecolo.Margin = new System.Windows.Forms.Padding(4);
             this.btn_filtraPerSecolo.Name = "btn_filtraPerSecolo";
-            this.btn_filtraPerSecolo.Size = new System.Drawing.Size(381, 53);
+            this.btn_filtraPerSecolo.Size = new System.Drawing.Size(377, 53);
             this.btn_filtraPerSecolo.TabIndex = 8;
             this.btn_filtraPerSecolo.Text = "Filtra per secolo";
             this.btn_filtraPerSecolo.UseVisualStyleBackColor = true;
@@ -267,10 +269,10 @@
             // 
             // btn_filtraOperePerTipologia
             // 
-            this.btn_filtraOperePerTipologia.Location = new System.Drawing.Point(3, 12);
+            this.btn_filtraOperePerTipologia.Location = new System.Drawing.Point(0, 12);
             this.btn_filtraOperePerTipologia.Margin = new System.Windows.Forms.Padding(4);
             this.btn_filtraOperePerTipologia.Name = "btn_filtraOperePerTipologia";
-            this.btn_filtraOperePerTipologia.Size = new System.Drawing.Size(380, 53);
+            this.btn_filtraOperePerTipologia.Size = new System.Drawing.Size(377, 53);
             this.btn_filtraOperePerTipologia.TabIndex = 7;
             this.btn_filtraOperePerTipologia.Text = "Filtra opere per tipologia";
             this.btn_filtraOperePerTipologia.UseVisualStyleBackColor = true;
@@ -292,7 +294,7 @@
             this.btn_CercaOperaPerDescrizione.Location = new System.Drawing.Point(12, 221);
             this.btn_CercaOperaPerDescrizione.Margin = new System.Windows.Forms.Padding(4);
             this.btn_CercaOperaPerDescrizione.Name = "btn_CercaOperaPerDescrizione";
-            this.btn_CercaOperaPerDescrizione.Size = new System.Drawing.Size(384, 53);
+            this.btn_CercaOperaPerDescrizione.Size = new System.Drawing.Size(376, 53);
             this.btn_CercaOperaPerDescrizione.TabIndex = 9;
             this.btn_CercaOperaPerDescrizione.Text = "Cerca opera per descrizione";
             this.btn_CercaOperaPerDescrizione.UseVisualStyleBackColor = true;
@@ -303,7 +305,7 @@
             this.btn_cercaOperaPerSoggetto.Location = new System.Drawing.Point(12, 282);
             this.btn_cercaOperaPerSoggetto.Margin = new System.Windows.Forms.Padding(4);
             this.btn_cercaOperaPerSoggetto.Name = "btn_cercaOperaPerSoggetto";
-            this.btn_cercaOperaPerSoggetto.Size = new System.Drawing.Size(384, 53);
+            this.btn_cercaOperaPerSoggetto.Size = new System.Drawing.Size(376, 53);
             this.btn_cercaOperaPerSoggetto.TabIndex = 10;
             this.btn_cercaOperaPerSoggetto.Text = "Cerca opera per soggetto";
             this.btn_cercaOperaPerSoggetto.UseVisualStyleBackColor = true;
@@ -351,7 +353,7 @@
             this.btn_cercaImmagine.Location = new System.Drawing.Point(12, 343);
             this.btn_cercaImmagine.Margin = new System.Windows.Forms.Padding(4);
             this.btn_cercaImmagine.Name = "btn_cercaImmagine";
-            this.btn_cercaImmagine.Size = new System.Drawing.Size(384, 53);
+            this.btn_cercaImmagine.Size = new System.Drawing.Size(376, 53);
             this.btn_cercaImmagine.TabIndex = 14;
             this.btn_cercaImmagine.Text = "Cerca immagine dell\'opera";
             this.btn_cercaImmagine.UseVisualStyleBackColor = true;
@@ -362,11 +364,33 @@
             this.btn_cercaMuseo.Location = new System.Drawing.Point(13, 404);
             this.btn_cercaMuseo.Margin = new System.Windows.Forms.Padding(4);
             this.btn_cercaMuseo.Name = "btn_cercaMuseo";
-            this.btn_cercaMuseo.Size = new System.Drawing.Size(384, 53);
+            this.btn_cercaMuseo.Size = new System.Drawing.Size(376, 53);
             this.btn_cercaMuseo.TabIndex = 15;
             this.btn_cercaMuseo.Text = "Cerca museo sulla mappa";
             this.btn_cercaMuseo.UseVisualStyleBackColor = true;
             this.btn_cercaMuseo.Click += new System.EventHandler(this.btn_cercaMuseo_Click);
+            // 
+            // btn_cercaEventi
+            // 
+            this.btn_cercaEventi.Location = new System.Drawing.Point(13, 465);
+            this.btn_cercaEventi.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_cercaEventi.Name = "btn_cercaEventi";
+            this.btn_cercaEventi.Size = new System.Drawing.Size(376, 53);
+            this.btn_cercaEventi.TabIndex = 16;
+            this.btn_cercaEventi.Text = "Cerca eventi ";
+            this.btn_cercaEventi.UseVisualStyleBackColor = true;
+            this.btn_cercaEventi.Click += new System.EventHandler(this.btn_cercaEventi_Click);
+            // 
+            // btn_mostraBrowser
+            // 
+            this.btn_mostraBrowser.Location = new System.Drawing.Point(217, 993);
+            this.btn_mostraBrowser.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_mostraBrowser.Name = "btn_mostraBrowser";
+            this.btn_mostraBrowser.Size = new System.Drawing.Size(172, 49);
+            this.btn_mostraBrowser.TabIndex = 17;
+            this.btn_mostraBrowser.Text = "Mostra Browser";
+            this.btn_mostraBrowser.UseVisualStyleBackColor = true;
+            this.btn_mostraBrowser.Click += new System.EventHandler(this.btn_mostraBrowser_Click);
             // 
             // Form1
             // 
@@ -374,6 +398,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.Controls.Add(this.btn_mostraBrowser);
             this.Controls.Add(this.pnl_bottoni);
             this.Controls.Add(this.btn_cercaMuseo);
             this.Controls.Add(this.btn_cercaImmagine);
@@ -388,6 +413,7 @@
             this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.grigliaOpere);
             this.Controls.Add(this.gmap);
+            this.Controls.Add(this.btn_cercaEventi);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -428,6 +454,8 @@
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Button btn_cercaImmagine;
         private System.Windows.Forms.Button btn_cercaMuseo;
+        private System.Windows.Forms.Button btn_cercaEventi;
+        private System.Windows.Forms.Button btn_mostraBrowser;
     }
 }
 
