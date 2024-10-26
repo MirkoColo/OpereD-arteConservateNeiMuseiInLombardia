@@ -35,6 +35,10 @@
             this.btn_cercaOperaPerID = new System.Windows.Forms.Button();
             this.btn_cercaOperaPerAutore = new System.Windows.Forms.Button();
             this.pnl_bottoni = new System.Windows.Forms.Panel();
+            this.btn_filtraPerFornitore = new System.Windows.Forms.Button();
+            this.btn_filtraPerMateriale = new System.Windows.Forms.Button();
+            this.btn_filtraPerProprieta = new System.Windows.Forms.Button();
+            this.btn_filtraPerStatoDiConservazione = new System.Windows.Forms.Button();
             this.btn_filtraPerEnte = new System.Windows.Forms.Button();
             this.btn_filtraPerTipoDiEdificio = new System.Windows.Forms.Button();
             this.btn_filtraPerProvincia = new System.Windows.Forms.Button();
@@ -44,14 +48,11 @@
             this.btn_filtraPerSecolo = new System.Windows.Forms.Button();
             this.btn_filtraOperePerTipologia = new System.Windows.Forms.Button();
             this.btn_caricaCatalogo = new System.Windows.Forms.Button();
-            this.btn_filtraPerProprieta = new System.Windows.Forms.Button();
-            this.btn_filtraPerStatoDiConservazione = new System.Windows.Forms.Button();
-            this.btn_filtraPerFornitore = new System.Windows.Forms.Button();
-            this.btn_filtraPerMateriale = new System.Windows.Forms.Button();
             this.btn_CercaOperaPerDescrizione = new System.Windows.Forms.Button();
             this.btn_cercaOperaPerSoggetto = new System.Windows.Forms.Button();
             this.gmap = new GMap.NET.WindowsForms.GMapControl();
             this.btn_mappa = new System.Windows.Forms.Button();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.grigliaOpere)).BeginInit();
             this.pnl_bottoni.SuspendLayout();
             this.SuspendLayout();
@@ -113,6 +114,7 @@
             // 
             // pnl_bottoni
             // 
+            this.pnl_bottoni.Controls.Add(this.webBrowser);
             this.pnl_bottoni.Controls.Add(this.btn_filtraPerFornitore);
             this.pnl_bottoni.Controls.Add(this.btn_filtraPerMateriale);
             this.pnl_bottoni.Controls.Add(this.btn_filtraPerProprieta);
@@ -132,6 +134,50 @@
             this.pnl_bottoni.TabIndex = 6;
             this.pnl_bottoni.Visible = false;
             this.pnl_bottoni.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_bottoni_Paint);
+            // 
+            // btn_filtraPerFornitore
+            // 
+            this.btn_filtraPerFornitore.Location = new System.Drawing.Point(4, 677);
+            this.btn_filtraPerFornitore.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_filtraPerFornitore.Name = "btn_filtraPerFornitore";
+            this.btn_filtraPerFornitore.Size = new System.Drawing.Size(379, 53);
+            this.btn_filtraPerFornitore.TabIndex = 18;
+            this.btn_filtraPerFornitore.Text = "Filtra per fornitore";
+            this.btn_filtraPerFornitore.UseVisualStyleBackColor = true;
+            this.btn_filtraPerFornitore.Click += new System.EventHandler(this.btn_filtraPerFornitore_Click);
+            // 
+            // btn_filtraPerMateriale
+            // 
+            this.btn_filtraPerMateriale.Location = new System.Drawing.Point(4, 436);
+            this.btn_filtraPerMateriale.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_filtraPerMateriale.Name = "btn_filtraPerMateriale";
+            this.btn_filtraPerMateriale.Size = new System.Drawing.Size(379, 53);
+            this.btn_filtraPerMateriale.TabIndex = 17;
+            this.btn_filtraPerMateriale.Text = "Filtra per materiale";
+            this.btn_filtraPerMateriale.UseVisualStyleBackColor = true;
+            this.btn_filtraPerMateriale.Click += new System.EventHandler(this.btn_filtraPerMateriale_Click);
+            // 
+            // btn_filtraPerProprieta
+            // 
+            this.btn_filtraPerProprieta.Location = new System.Drawing.Point(4, 616);
+            this.btn_filtraPerProprieta.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_filtraPerProprieta.Name = "btn_filtraPerProprieta";
+            this.btn_filtraPerProprieta.Size = new System.Drawing.Size(379, 53);
+            this.btn_filtraPerProprieta.TabIndex = 16;
+            this.btn_filtraPerProprieta.Text = "Filtra per proprietà";
+            this.btn_filtraPerProprieta.UseVisualStyleBackColor = true;
+            this.btn_filtraPerProprieta.Click += new System.EventHandler(this.btn_filtraPerProprieta_Click);
+            // 
+            // btn_filtraPerStatoDiConservazione
+            // 
+            this.btn_filtraPerStatoDiConservazione.Location = new System.Drawing.Point(4, 375);
+            this.btn_filtraPerStatoDiConservazione.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_filtraPerStatoDiConservazione.Name = "btn_filtraPerStatoDiConservazione";
+            this.btn_filtraPerStatoDiConservazione.Size = new System.Drawing.Size(379, 53);
+            this.btn_filtraPerStatoDiConservazione.TabIndex = 15;
+            this.btn_filtraPerStatoDiConservazione.Text = "Filtra per stato di conservazione";
+            this.btn_filtraPerStatoDiConservazione.UseVisualStyleBackColor = true;
+            this.btn_filtraPerStatoDiConservazione.Click += new System.EventHandler(this.btn_filtraPerStatoDiConservazione_Click);
             // 
             // btn_filtraPerEnte
             // 
@@ -232,50 +278,6 @@
             this.btn_caricaCatalogo.UseVisualStyleBackColor = true;
             this.btn_caricaCatalogo.Click += new System.EventHandler(this.btn_caricaCatalogo_Click);
             // 
-            // btn_filtraPerProprieta
-            // 
-            this.btn_filtraPerProprieta.Location = new System.Drawing.Point(4, 616);
-            this.btn_filtraPerProprieta.Margin = new System.Windows.Forms.Padding(4);
-            this.btn_filtraPerProprieta.Name = "btn_filtraPerProprieta";
-            this.btn_filtraPerProprieta.Size = new System.Drawing.Size(379, 53);
-            this.btn_filtraPerProprieta.TabIndex = 16;
-            this.btn_filtraPerProprieta.Text = "Filtra per proprietà";
-            this.btn_filtraPerProprieta.UseVisualStyleBackColor = true;
-            this.btn_filtraPerProprieta.Click += new System.EventHandler(this.btn_filtraPerProprieta_Click);
-            // 
-            // btn_filtraPerStatoDiConservazione
-            // 
-            this.btn_filtraPerStatoDiConservazione.Location = new System.Drawing.Point(4, 375);
-            this.btn_filtraPerStatoDiConservazione.Margin = new System.Windows.Forms.Padding(4);
-            this.btn_filtraPerStatoDiConservazione.Name = "btn_filtraPerStatoDiConservazione";
-            this.btn_filtraPerStatoDiConservazione.Size = new System.Drawing.Size(379, 53);
-            this.btn_filtraPerStatoDiConservazione.TabIndex = 15;
-            this.btn_filtraPerStatoDiConservazione.Text = "Filtra per stato di conservazione";
-            this.btn_filtraPerStatoDiConservazione.UseVisualStyleBackColor = true;
-            this.btn_filtraPerStatoDiConservazione.Click += new System.EventHandler(this.btn_filtraPerStatoDiConservazione_Click);
-            // 
-            // btn_filtraPerFornitore
-            // 
-            this.btn_filtraPerFornitore.Location = new System.Drawing.Point(4, 677);
-            this.btn_filtraPerFornitore.Margin = new System.Windows.Forms.Padding(4);
-            this.btn_filtraPerFornitore.Name = "btn_filtraPerFornitore";
-            this.btn_filtraPerFornitore.Size = new System.Drawing.Size(379, 53);
-            this.btn_filtraPerFornitore.TabIndex = 18;
-            this.btn_filtraPerFornitore.Text = "Filtra per fornitore";
-            this.btn_filtraPerFornitore.UseVisualStyleBackColor = true;
-            this.btn_filtraPerFornitore.Click += new System.EventHandler(this.btn_filtraPerFornitore_Click);
-            // 
-            // btn_filtraPerMateriale
-            // 
-            this.btn_filtraPerMateriale.Location = new System.Drawing.Point(4, 436);
-            this.btn_filtraPerMateriale.Margin = new System.Windows.Forms.Padding(4);
-            this.btn_filtraPerMateriale.Name = "btn_filtraPerMateriale";
-            this.btn_filtraPerMateriale.Size = new System.Drawing.Size(379, 53);
-            this.btn_filtraPerMateriale.TabIndex = 17;
-            this.btn_filtraPerMateriale.Text = "Filtra per materiale";
-            this.btn_filtraPerMateriale.UseVisualStyleBackColor = true;
-            this.btn_filtraPerMateriale.Click += new System.EventHandler(this.btn_filtraPerMateriale_Click);
-            // 
             // btn_CercaOperaPerDescrizione
             // 
             this.btn_CercaOperaPerDescrizione.Location = new System.Drawing.Point(12, 221);
@@ -335,6 +337,14 @@
             this.btn_mappa.UseVisualStyleBackColor = true;
             this.btn_mappa.Click += new System.EventHandler(this.btn_mappa_Click);
             // 
+            // webBrowser
+            // 
+            this.webBrowser.Location = new System.Drawing.Point(-11, 143);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.Size = new System.Drawing.Size(417, 194);
+            this.webBrowser.TabIndex = 13;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -389,6 +399,7 @@
         private System.Windows.Forms.Button btn_cercaOperaPerSoggetto;
         private GMap.NET.WindowsForms.GMapControl gmap;
         private System.Windows.Forms.Button btn_mappa;
+        private System.Windows.Forms.WebBrowser webBrowser;
     }
 }
 

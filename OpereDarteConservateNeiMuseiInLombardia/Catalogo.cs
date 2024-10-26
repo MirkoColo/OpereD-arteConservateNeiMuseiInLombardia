@@ -268,26 +268,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             return result;
         }
 
-        public PointLatLng ConvertiCoordinate(string coordinate)
-        {
-            coordinate = coordinate.Trim('(', ')').Trim();
-            string[] campi = coordinate.Split(',');
-            if (campi.Length != 2)
-            {
-                return new PointLatLng(0, 0);
-            }
-            // Variabili per latitudine e longitudine
-            double latitude, longitude;
-
-            // Prova a convertire le parti in double
-            if (!double.TryParse(campi[0].Trim(), out latitude) || !double.TryParse(campi[1].Trim(), out longitude))
-            {
-                return new PointLatLng(0, 0);  // Valore predefinito
-            }
-
-            // Crea e restituisci un nuovo oggetto PointLatLng
-            return new PointLatLng(latitude, longitude);
-        }
+        
 
     }
 }

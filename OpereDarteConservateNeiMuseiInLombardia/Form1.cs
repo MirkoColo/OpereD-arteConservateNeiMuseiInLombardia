@@ -239,13 +239,64 @@ namespace OpereDarteConservateNeiMuseiInLombardia
 
         }
 
+        private void LoadMapWithMarkers()
+        {
+            // Costruisci HTML e JavaScript per Google Maps con 200 marker
+            var sb = new StringBuilder();
+            sb.Append(@"
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Google Maps con Marker</title>
+                    <script src='https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY'></script>
+                    <script>
+                        function initMap() {
+                            const map = new google.maps.Map(document.getElementById('map'), {
+                                center: { lat: 45.4654219, lng: 12.4964 }, // Centro su Roma, per esempio
+                                zoom: 5
+                            });
+
+                            const markers = [
+            ");
+
+            // Genera 200 marker casuali
+            var random = new Random();
+            for (int i = 0; i < 200; i++)
+            {
+                double lat = 41.0 + random.NextDouble(); // Latitudine casuale vicino a Roma
+                double lng = 12.0 + random.NextDouble(); // Longitudine casuale vicino a Roma
+                string title = $"Marker {i + 1}";
+
+                sb.Append($@"{{ lat: {lat}, lng: {lng}, title: '{title}' }},");
+            }
+
+            sb.Append(@"];
+                            markers.forEach(markerData => {
+                                new google.maps.Marker({
+                                    position: { lat: markerData.lat, lng: markerData.lng },
+                                    map: map,
+                                    title: markerData.title
+                                });
+                            });
+                        }
+                    </script>
+                </head>
+                <body onload='initMap()'>
+                    <div id='map' style='width: 100%; height: 100%;'></div>
+                </body>
+                </html>
+            ");
+
+            // Carica il contenuto HTML nel controllo WebBrowser
+            webBrowser.DocumentText = sb.ToString();
+        }
         private void InitializeMap()
         {
             // Imposta il provider della mappa
             gmap.MapProvider = GMapProviders.GoogleMap;
 
             // Imposta le coordinate iniziali della mappa
-            gmap.Position = new PointLatLng(45.4654219,9.1859243); // Milano, Italia
+            gmap.Position = new PointLatLng(45.4654219, 9.1859243); // Milano, Italia
 
             // Imposta zoom
             gmap.MinZoom = 2;
@@ -276,15 +327,37 @@ namespace OpereDarteConservateNeiMuseiInLombardia
                 }
             }
 
-            for (int i = 0; i < catalogoSenzaDuplicati.Count / 40; i++)
+            for (int i = 0; i < catalogoSenzaDuplicati.Count; i++)
             {
-                var marker = new GMarkerGoogle(new PointLatLng(45.4654219, 9.1859243), GMarkerGoogleType.red_dot);
+                var marker = new GMarkerGoogle(ConvertiCoordinate(catalogoSenzaDuplicati[i].Location), GMarkerGoogleType.red_dot);
                 markersOverlay.Markers.Add(marker);
             }
             gmap.Overlays.Add(markersOverlay);
 
             gmap.Refresh();
 
+        }
+
+        public PointLatLng ConvertiCoordinate(string coordinate)
+        {
+            coordinate = coordinate.Trim('(', ')').Trim();
+            string[] campi = coordinate.Split(',');
+            if (campi.Length != 2)
+            {
+                return new PointLatLng(0, 0);
+            }
+            // Variabili per latitudine e longitudine
+            double latitude, longitude;
+
+
+            // Prova a convertire le parti in double
+            if (!double.TryParse(campi[0].Trim().Replace('.', ','), out latitude) || !double.TryParse(campi[1].Trim().Replace('.', ','), out longitude))
+            {
+                return new PointLatLng(0, 0);  // Valore predefinito
+            }
+
+            // Crea e restituisci un nuovo oggetto PointLatLng
+            return new PointLatLng(latitude, longitude);
         }
 
         private void btn_mappa_Click(object sender, EventArgs e)
