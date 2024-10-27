@@ -131,39 +131,40 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         public int Ricerca(string opera, string sigla)
         {
             int i;
-            if (opera != "")
+            for (i = 0; i < opere.Count; i++)
             {
-                for (i = 0; i < opere.Count; i++)
+                var tipo = opere[i].GetType();  // Ottieni il tipo dell'oggetto
+                var proprieta = tipo.GetProperty(sigla);  // Ottieni la proprietà
+                var valoreProprieta = proprieta.GetValue(opere[i])?.ToString();  // Ottieni il valore della proprietà come stringa
+                if (valoreProprieta == opera)
                 {
-                    var tipo = opere[i].GetType();  // Ottieni il tipo dell'oggetto
-                    var proprieta = tipo.GetProperty(sigla);  // Ottieni la proprietà
-                    var valoreProprieta = proprieta.GetValue(opere[i])?.ToString();  // Ottieni il valore della proprietà come stringa
-                    if (valoreProprieta == opera)
-                    {
-                        return i;
-                    }
+                    return i;
                 }
             }
-                return -1;
-           
+
+            return -1;
         }
 
         public List<Opera> Ricercas(string opera, string sigla)
         { 
             List<Opera> operes = new List<Opera>();
-            for (int i = 0; i < opere.Count; i++)
+            if (opera.Trim() != "")
             {
-                var tipo = opere[i].GetType();  // Ottieni il tipo dell'oggetto
-                var proprieta = tipo.GetProperty(sigla);  // Ottieni la proprietà
-                var valoreProprieta = proprieta.GetValue(opere[i])?.ToString();  // Ottieni il valore della proprietà come stringa
-                if (valoreProprieta != null && valoreProprieta.Contains(opera))
+                for (int i = 0; i < opere.Count; i++)
                 {
-                    operes.Add(opere[i]);  // Aggiungi l'indice dell'opera trovata
-                }
+                    var tipo = opere[i].GetType();  // Ottieni il tipo dell'oggetto
+                    var proprieta = tipo.GetProperty(sigla);  // Ottieni la proprietà
+                    var valoreProprieta = proprieta.GetValue(opere[i])?.ToString();  // Ottieni il valore della proprietà come stringa
+                    if (valoreProprieta != null && valoreProprieta.Contains(opera))
+                    {
+                        operes.Add(opere[i]);  // Aggiungi l'indice dell'opera trovata
+                    }
 
+                }
+                return operes;
             }
 
-            return operes;
+            return opere;
 
         }
 

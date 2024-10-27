@@ -35,7 +35,6 @@
             this.btn_cercaOperaPerID = new System.Windows.Forms.Button();
             this.btn_cercaOperaPerAutore = new System.Windows.Forms.Button();
             this.pnl_bottoni = new System.Windows.Forms.Panel();
-            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.btn_filtraPerFornitore = new System.Windows.Forms.Button();
             this.btn_filtraPerMateriale = new System.Windows.Forms.Button();
             this.btn_filtraPerProprieta = new System.Windows.Forms.Button();
@@ -48,6 +47,7 @@
             this.btn_filtraPerMuseo = new System.Windows.Forms.Button();
             this.btn_filtraPerSecolo = new System.Windows.Forms.Button();
             this.btn_filtraOperePerTipologia = new System.Windows.Forms.Button();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.btn_caricaCatalogo = new System.Windows.Forms.Button();
             this.btn_CercaOperaPerDescrizione = new System.Windows.Forms.Button();
             this.btn_cercaOperaPerSoggetto = new System.Windows.Forms.Button();
@@ -70,6 +70,7 @@
             this.grigliaOpere.RowHeadersWidth = 51;
             this.grigliaOpere.Size = new System.Drawing.Size(1519, 1039);
             this.grigliaOpere.TabIndex = 0;
+            this.grigliaOpere.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grigliaOpere_ColumnHeaderMouseClick);
             this.grigliaOpere.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grigliaOpere_KeyDown);
             // 
             // btn_ricerche
@@ -137,14 +138,6 @@
             this.pnl_bottoni.TabIndex = 6;
             this.pnl_bottoni.Visible = false;
             this.pnl_bottoni.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_bottoni_Paint);
-            // 
-            // webBrowser
-            // 
-            this.webBrowser.Location = new System.Drawing.Point(404, 14);
-            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(1519, 1039);
-            this.webBrowser.TabIndex = 13;
             // 
             // btn_filtraPerFornitore
             // 
@@ -278,6 +271,14 @@
             this.btn_filtraOperePerTipologia.UseVisualStyleBackColor = true;
             this.btn_filtraOperePerTipologia.Click += new System.EventHandler(this.btn_filtraOperePerTipologia_Click);
             // 
+            // webBrowser
+            // 
+            this.webBrowser.Location = new System.Drawing.Point(404, 14);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.Size = new System.Drawing.Size(1519, 1039);
+            this.webBrowser.TabIndex = 13;
+            // 
             // btn_caricaCatalogo
             // 
             this.btn_caricaCatalogo.Location = new System.Drawing.Point(9, 993);
@@ -410,10 +411,10 @@
             this.Controls.Add(this.btn_cercaOperaPerID);
             this.Controls.Add(this.btn_filtri);
             this.Controls.Add(this.btn_ricerche);
-            this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.grigliaOpere);
             this.Controls.Add(this.gmap);
             this.Controls.Add(this.btn_cercaEventi);
+            this.Controls.Add(this.webBrowser);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";

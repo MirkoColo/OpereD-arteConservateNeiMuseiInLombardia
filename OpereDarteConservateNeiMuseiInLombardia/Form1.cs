@@ -32,12 +32,6 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             catalogo = new Catalogo(this);
             this.KeyPreview = true;
         }
-
-        Dictionary<string, string> descrizioniSigle = new Dictionary<string, string>()
-        {
-            { "Idk", "codice" }
-        };
-
        
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -48,7 +42,6 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             grigliaOpere.ReadOnly = true;
             gmap.Visible = false;
             webBrowser.Visible = false;
-
             InitializeMap();
         }
 
@@ -403,6 +396,79 @@ namespace OpereDarteConservateNeiMuseiInLombardia
                 webBrowser.Visible = true;
                 grigliaOpere.Visible = false;
             }
+        }
+
+        public string GetSignificato(string sigla)
+        {
+            switch (sigla)
+            {
+                case "Idk":
+                    return "Identificativo unico dell'opera";
+                case "Esc":
+                    return "Ente o museo che ospita l'opera";
+                case "Grp":
+                    return "Gruppo di opere d'arte (categoria)";
+                case "Ogtd":
+                    return "Tipo di opera (es. dipinto, scultura)";
+                case "Sgti":
+                    return "Soggetto dell'opera";
+                case "Pvcp":
+                    return "Provincia di origine";
+                case "Pvcn":
+                    return "Comune di origine";
+                case "Pvcc":
+                    return "Luogo specifico di origine (località)";
+                case "Ldct":
+                    return "Tipo di edificio dove si trova l'opera";
+                case "Ldcq":
+                    return "Tipo di ente o ente pubblico";
+                case "LdcN":
+                    return "Nome dell'edificio";
+                case "LdcU":
+                    return "Indirizzo dell'edificio";
+                case "LdcM":
+                    return "Nome del museo o dell'ente che ospita l'opera";
+                case "Cold":
+                    return "Condizioni di conservazione dell'opera";
+                case "Dtzg":
+                    return "Datazione dell'opera (secolo)";
+                case "Dtsi":
+                    return "Anno di creazione dell'opera";
+                case "Autn":
+                    return "Nome dell'autore dell'opera";
+                case "Atbd":
+                    return "Categoria";
+                case "Mtc":
+                    return "Materiale utilizzato per l'opera";
+                case "Deso":
+                    return "Descrizione dell'opera";
+                case "Nsc":
+                    return "Note sullo stato di conservazione";
+                case "Stcc":
+                    return "Stato di conservazione";
+                case "Cdgg":
+                    return "Proprietà dell'opera";
+                case "Fur":
+                    return "Nome del fornitore";
+                case "GpdpX":
+                    return "Coordinate X della posizione";
+                case "GpdpY":
+                    return "Coordinate Y della posizione";
+                case "Location":
+                    return "Coordinate geografiche (latitudine, longitudine)";
+                default:
+                    return "Significato sconosciuto";
+            }
+        }
+
+        private void grigliaOpere_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // Recupera la sigla dall'intestazione della colonna
+            string sigla = grigliaOpere.Columns[e.ColumnIndex].HeaderText;
+            // Imposta il significato in base alla sigla
+            string significato = GetSignificato(sigla);
+
+            MessageBox.Show(significato);
         }
     }
 }
