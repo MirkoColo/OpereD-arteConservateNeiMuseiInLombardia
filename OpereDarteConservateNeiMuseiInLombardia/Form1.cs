@@ -377,8 +377,12 @@ namespace OpereDarteConservateNeiMuseiInLombardia
 
         private void btn_cercaEventi_Click(object sender, EventArgs e)
         {
+            webBrowser.ScriptErrorsSuppressed = true;
+
             webBrowser.Navigate("https://www.musei.regione.lombardia.it/wps/portal/site/musei-riconosciuti-in-lombardia/eventi-e-novita");
             webBrowser.Visible = true;
+            grigliaOpere.Visible = false;
+            gmap.Visible = false;
         }
 
         private void btn_mostraBrowser_Click(object sender, EventArgs e)
