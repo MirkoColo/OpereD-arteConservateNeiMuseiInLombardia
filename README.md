@@ -12,8 +12,8 @@
   3. Per ottenere informazioni relative alle sigle cliccare la loro relativa cella 
 
 - ISTALLAZIONE
-1. Clona la repository: git clone https://github.com/MirkoColo/OpereD-arteConservateNeiMuseiInLombardia
-2. Apri la soluzione in Visual Studio
-3. Compila il progetto
-4. Avvia l'applicazione
+  1. Clona la repository: git clone https://github.com/MirkoColo/OpereD-arteConservateNeiMuseiInLombardia
+  2. Apri la soluzione in Visual Studio
+  3. Compila il progetto
+  4. Avvia l'applicazione
 
