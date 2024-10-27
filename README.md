@@ -7,8 +7,8 @@ Ricerche: ID, autore, descrizione, soggetto, immagine, museo sulla mappa ed even
 Filtrazioni: tipologia, secolo, museo, gruppo, comune, provincia, tipo di edificio, stato di conservazione, materiale, ente, proprietà e fornitore.
 
 - MODALITÀ D'USO
-* Premi f per attivare/disattivare la modalità schermo intero
-* Premi esc per chiudere l'applicazione
+Premi f per attivare/disattivare la modalità schermo intero
+Premi esc per chiudere l'applicazione
 
 - ISTALLAZIONE
 1. Clona la repository: git clone https://github.com/MirkoColo/OpereD-arteConservateNeiMuseiInLombardia
