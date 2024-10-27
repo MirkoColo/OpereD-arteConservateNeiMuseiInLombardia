@@ -383,7 +383,6 @@ namespace OpereDarteConservateNeiMuseiInLombardia
 
         private void btn_mostraBrowser_Click(object sender, EventArgs e)
         {
-
             if (webBrowser.Visible)
             {
                 gmap.Visible = false;
