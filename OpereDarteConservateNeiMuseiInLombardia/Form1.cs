@@ -7,21 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.Json;
 using System.IO;
 using Microsoft.VisualBasic;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms;
 using GMap.NET;
-using System.Security.Policy;
 
 namespace OpereDarteConservateNeiMuseiInLombardia
 {
     public partial class Form1 : Form
     {
         Catalogo catalogo;
-        List<Opera> operes = new List<Opera>();
         private bool isFullScreen = false;  // Variabile di stato per tenere traccia della modalità schermo intero
         private FormBorderStyle prevFormBorderStyle;
         private FormWindowState prevWindowState;
@@ -31,6 +28,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             InitializeComponent();
             catalogo = new Catalogo(this);
             this.KeyPreview = true;
+            riempiListaPerFiltro();
         }
        
         private void Form1_Load(object sender, EventArgs e)
@@ -42,6 +40,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             grigliaOpere.ReadOnly = true;
             gmap.Visible = false;
             webBrowser.Visible = false;
+            pnl_listBox.Visible = false;
             InitializeMap();
         }
 
@@ -52,19 +51,12 @@ namespace OpereDarteConservateNeiMuseiInLombardia
 
         private void btn_ricerche_Click(object sender, EventArgs e)
         {
-            pnl_bottoni.Visible = false;
+            pnl_listBox.Visible = false;
         }
 
-        private void btn_filtri_Click(object sender, EventArgs e)
+        private void btn_filtroDinamico_Click(object sender, EventArgs e)
         {
-            pnl_bottoni.Visible = true;
-        }
-
-        private void btn_cercaOperaPerAutore_Click(object sender, EventArgs e)
-        {
-            grigliaOpere.DataSource = catalogo.CercaOperaPerAutore();
-            MostraGriglia();
-
+            pnl_listBox.Visible = true;
         }
 
         private void btn_cercaOperaPerID_Click(object sender, EventArgs e)
@@ -89,6 +81,12 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             MostraGriglia();
         }
 
+        private void btn_cercaOperaPerSoggetto_Click(object sender, EventArgs e)
+        {
+            grigliaOpere.DataSource = catalogo.CercaOperaPerSoggetto();
+            MostraGriglia();
+        }
+
         private void btn_cercaImmagine_Click(object sender, EventArgs e)
         {
             int risultato = catalogo.CercaImmagine();
@@ -102,31 +100,6 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             {
                 MessageBox.Show("Opera non trovata.");
             }
-        }
-
-        private void btn_filtraOperePerTipologia_Click(object sender, EventArgs e)
-        {
-            grigliaOpere.DataSource = catalogo.FiltraPerTipologia();
-            MostraGriglia();
-        }
-
-        private void btn_filtraPerSecolo_Click(object sender, EventArgs e)
-        {
-            grigliaOpere.DataSource = catalogo.FiltraPerSecolo();
-            MostraGriglia();
-        }
-
-        private void btn_filtraPerMuseo_Click(object sender, EventArgs e)
-        {
-            
-            grigliaOpere.DataSource = catalogo.FiltraPerMuseo();
-            MostraGriglia();
-
-        }
-
-        private void pnl_bottoni_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void grigliaOpere_KeyDown(object sender, KeyEventArgs e)
@@ -156,36 +129,6 @@ namespace OpereDarteConservateNeiMuseiInLombardia
 
         }
 
-        private void btn_filtraPerGruppo_Click(object sender, EventArgs e)
-        {
-            grigliaOpere.DataSource = catalogo.FiltraPerGruppo();
-            MostraGriglia();
-        }
-
-        private void btn_filtraPerComune_Click(object sender, EventArgs e)
-        {
-            grigliaOpere.DataSource = catalogo.FiltraPerComune();
-            MostraGriglia();
-        }
-
-        private void btn_filtraPerProvincia_Click(object sender, EventArgs e)
-        {
-            grigliaOpere.DataSource = catalogo.FiltraPerProvincia();
-            MostraGriglia();
-        }
-
-
-        private void btn_filtraPerEnte_Click(object sender, EventArgs e)
-        {
-            grigliaOpere.DataSource = catalogo.FiltraPerEnte();
-            MostraGriglia();
-        }
-
-        private void btn_filtraPerTipoDiEdificio_Click(object sender, EventArgs e)
-        {
-            grigliaOpere.DataSource = catalogo.FiltraPerTipoDiEdificio();
-            MostraGriglia();
-        }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -223,39 +166,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
                 this.TopMost = true;  // Porta la finestra in primo piano
                 isFullScreen = true;
             }
-        }
-
-        private void btn_filtraPerStatoDiConservazione_Click(object sender, EventArgs e)
-        {
-            grigliaOpere.DataSource = catalogo.FiltraPerStatoDiConservazione();
-            MostraGriglia();
-        }
-
-        private void btn_filtraPerProprieta_Click(object sender, EventArgs e)
-        {
-            grigliaOpere.DataSource = catalogo.FiltraPerProprieta();
-            MostraGriglia();
-
-        }
-
-        private void btn_filtraPerMateriale_Click(object sender, EventArgs e)
-        {
-            grigliaOpere.DataSource = catalogo.FiltraPerMateriale();
-            MostraGriglia();
-        }
-
-        private void btn_filtraPerFornitore_Click(object sender, EventArgs e)
-        {
-            grigliaOpere.DataSource = catalogo.FiltraPerFornitore();
-            MostraGriglia();
-        }
-
-        private void btn_cercaOperaPerSoggetto_Click(object sender, EventArgs e)
-        {
-            grigliaOpere.DataSource = catalogo.CercaOperaPerSoggetto();
-            MostraGriglia();
-
-        }
+        }   
 
         private void InitializeMap()
         {
@@ -263,7 +174,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             gmap.MapProvider = GMapProviders.GoogleMap;
 
             // Imposta le coordinate iniziali della mappa
-            gmap.Position = new PointLatLng(45.4654219, 9.1859243); // Milano, Italia
+            gmap.Position = new PointLatLng(45.4654219, 9.1859243); // Milano
 
             // Imposta zoom
             gmap.MinZoom = 2;
@@ -371,7 +282,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             }
             else
             {
-                MessageBox.Show("Opera non trovata.");
+                MessageBox.Show("Museo non trovato.");
             }
         }
 
@@ -416,20 +327,20 @@ namespace OpereDarteConservateNeiMuseiInLombardia
                 case "Sgti":
                     return "Soggetto dell'opera";
                 case "Pvcp":
-                    return "Provincia di origine";
+                    return "Sigla provincia";
                 case "Pvcn":
-                    return "Comune di origine";
+                    return "Provincia di origine";
                 case "Pvcc":
-                    return "Luogo specifico di origine (località)";
+                    return "Comune di origine";
                 case "Ldct":
                     return "Tipo di edificio dove si trova l'opera";
                 case "Ldcq":
-                    return "Tipo di ente o ente pubblico";
-                case "LdcN":
+                    return "Tipo di ente";
+                case "Ldcn":
                     return "Nome dell'edificio";
-                case "LdcU":
+                case "Ldcu":
                     return "Indirizzo dell'edificio";
-                case "LdcM":
+                case "Ldcm":
                     return "Nome del museo o dell'ente che ospita l'opera";
                 case "Cold":
                     return "Condizioni di conservazione dell'opera";
@@ -473,5 +384,61 @@ namespace OpereDarteConservateNeiMuseiInLombardia
 
             MessageBox.Show(significato);
         }
+
+        public void riempiListaPerFiltro()
+        {
+            // Riempimento della CheckedListBox con gli attributi della classe Opera
+            listaFiltroDin.Items.Add("Grp:Gruppo di opere d'arte (categoria)");
+            listaFiltroDin.Items.Add("Ogtd:Tipo di opera (es. dipinto, scultura)");
+            listaFiltroDin.Items.Add("Pvcp:Sigla provincia");
+            listaFiltroDin.Items.Add("Pvcn:Provincia di origine");
+            listaFiltroDin.Items.Add("Pvcc:comune di origine");
+            listaFiltroDin.Items.Add("Ldct:Tipo di edificio dove si trova l'opera");
+            listaFiltroDin.Items.Add("Ldcq:Tipo di ente o ente pubblico");
+            listaFiltroDin.Items.Add("Ldcn:Nome dell'edificio");
+            listaFiltroDin.Items.Add("Ldcu:Indirizzo dell'edificio");
+            listaFiltroDin.Items.Add("Ldcm:Nome del museo o dell'ente che ospita l'opera");
+            listaFiltroDin.Items.Add("Cold:Condizioni di conservazione dell'opera");
+            listaFiltroDin.Items.Add("Dtzg:Datazione dell'opera (secolo)");
+            listaFiltroDin.Items.Add("Dtsi:Anno di creazione dell'opera");
+            listaFiltroDin.Items.Add("Autn:Nome dell'autore dell'opera");
+            listaFiltroDin.Items.Add("Atbd:Categoria");
+            listaFiltroDin.Items.Add("Mtc:Materiale utilizzato per l'opera");
+            listaFiltroDin.Items.Add("Stcc:Stato di conservazione");
+            listaFiltroDin.Items.Add("Cdgg:Proprietà dell'opera");
+            listaFiltroDin.Items.Add("Fur:Nome del fornitore");
+
+        }
+
+        private void btn_applicaFiltri_Click(object sender, EventArgs e)
+        {
+            List<string> values = new List<string>();
+            List<string> checkedItems = new List<string>();
+            foreach (var item in listaFiltroDin.CheckedItems)
+            {
+                string attributo = item.ToString().Split(':')[1];
+                string input = ShowInputBox($"Inserisci {attributo}", $"Inserimento {attributo}", "");
+                values.Add(input);
+                checkedItems.Add(item.ToString().Split(':')[0]);
+            }
+            grigliaOpere.DataSource = catalogo.FiltroDinamico(values,checkedItems);
+            MostraGriglia();
+        }
+        public string ShowInputBox(string prompt, string title = "Input", string defaultValue = "")
+        {
+            // Disabilita temporaneamente TopMost
+            bool wasTopMost = this.TopMost;
+            this.TopMost = false;
+
+            // Mostra l'InputBox e raccoglie l'input dell'utente
+            string result = Interaction.InputBox(prompt, title, defaultValue);
+
+            // Ripristina TopMost allo stato precedente
+            this.TopMost = wasTopMost;
+
+            return result;
+        }
+
+        
     }
 }

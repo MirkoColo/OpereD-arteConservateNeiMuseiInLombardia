@@ -24,13 +24,13 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         // SGTI: Soggetto dell'opera
         private string SGTI;
 
-        // PVCP: Provincia di origine
+        // PVCP: Sigla provincia
         private string PVCP;
 
-        // PVCN: Comune di origine
+        // PVCN: Provincia di origine
         private string PVCN;
 
-        // PVCC: Luogo specifico di origine (località)
+        // PVCC: Comune di origine
         private string PVCC;
 
         // LDCT: Tipo di edificio dove si trova l'opera

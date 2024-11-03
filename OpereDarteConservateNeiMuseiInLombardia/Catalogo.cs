@@ -92,12 +92,6 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             return risultato;
         }
 
-        public List<Opera> CercaOperaPerAutore()
-        {
-            string autore = ShowInputBox("Inserisci l'autore dell'opera", "Inserimento autore opera", "");
-            return Ricercas(autore,"Autn");
-
-        }
 
         public List<Opera> CercaOperaPerDescrizione()
         {
@@ -124,7 +118,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         public int CercaMuseo()
         {
             string museo = ShowInputBox("Inserisci il nome del museo", "Inserimento museo", "");
-            int risultato = Ricerca(museo, "Esc");
+            int risultato = Ricerca(museo, "Ldcm");
 
             return risultato;
         }
@@ -165,99 +159,52 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             }
 
             return opere;
-
         }
 
-        // FILTRI
-        public List<Opera> FiltraPerTipologia()
-        {
-            string tipo = ShowInputBox("Inserisci la tipologia", "Inserimento tipologia", "");
-
-            return Filtra(tipo, "Ogtd");
-        }
-        public List<Opera> FiltraPerSecolo()
-        {
-            string secolo = ShowInputBox("Inserisci il secolo", "Inserimento secolo", "");
-
-            return Filtra(secolo, "Dtzg");
-        }
-        public List<Opera> FiltraPerMuseo()
-        {
-            string museo = ShowInputBox("Inserisci il nome museo", "Inserimento nome museo", "");
-
-            return Filtra(museo, "Esc");
-        }
-
-        public List<Opera> FiltraPerGruppo()
-        {
-            string tipo = ShowInputBox("Inserisci il gruppo", "Inserimento gruppo", "");
-
-            return Filtra(tipo, "Grp");
-        }
-
-        public List<Opera> FiltraPerComune()
-        {
-            string tipo = ShowInputBox("Inserisci il comune", "Inserimento comune", "");
-
-            return Filtra(tipo, "Pvcp");
-        }
-        public List<Opera> FiltraPerProvincia()
-        {
-            string tipo = ShowInputBox("Inserisci la provincia", "Inserimento provincia", "");
-
-            return Filtra(tipo, "Pvcn");
-        }
-        public List<Opera> FiltraPerEnte()
-        {
-            string tipo = ShowInputBox("Inserisci l'ente", "Inserimento ente", "");
-
-            return Filtra(tipo, "Ldcq");
-        }
-        public List<Opera> FiltraPerTipoDiEdificio()
-        {
-            string tipo = ShowInputBox("Inserisci il tipo di edificio", "Inserimento tipo di edificio", "");
-
-            return Filtra(tipo, "Ldct");
-        }
-        public List<Opera> FiltraPerStatoDiConservazione()
-        {
-            string tipo = ShowInputBox("Inserisci lo stato di conservazione", "Inserimento stato di conservazione", "");
-
-            return Filtra(tipo, "Stcc");
-        }
-        public List<Opera> FiltraPerProprieta()
-        {
-            string tipo = ShowInputBox("Inserisci il tipo di proprietà", "Inserimento proprietà", "");
-
-            return Filtra(tipo, "Cdgg");
-        }
-        public List<Opera> FiltraPerMateriale()
-        {
-            string tipo = ShowInputBox("Inserisci il materiale", "Inserimento materiale", "");
-
-            return Filtra(tipo, "Mtc");
-        }
-        public List<Opera> FiltraPerFornitore()
-        {
-            string tipo = ShowInputBox("Inserisci il nome del fornitore", "Inserimento fornitore", "");
-
-            return Filtra(tipo, "Fur");
-        }
-
-        public List<Opera> Filtra(string opera, string sigla)
+        public List<Opera> FiltroDinamico(List<string> values, List<string> checkedItems)
         {
             List<Opera> operes = new List<Opera>();
+            List<Opera> opereTemp = new List<Opera>();
 
-            for (int i = 0; i < opere.Count; i++)
+            for (int z = 0; z < checkedItems.Count; z++)
             {
-                var tipo = opere[i].GetType();  // Ottieni il tipo dell'oggetto
-                var proprieta = tipo.GetProperty(sigla);  // Ottieni la proprietà
-                var valoreProprieta = proprieta.GetValue(opere[i])?.ToString();  // Ottieni il valore della proprietà come stringa
-                if (valoreProprieta == opera)
+                if(z > 0)
                 {
-                    operes.Add(opere[i]);
+                    for (int i = 0; i < operes.Count; i++)
+                    {
+
+                        var tipo = operes[i].GetType();  // Ottieni il tipo dell'oggetto
+                        var proprieta = tipo.GetProperty(checkedItems[z]);  // Ottieni la proprietà
+                        var valoreProprieta = proprieta.GetValue(operes[i])?.ToString();  // Ottieni il valore della proprietà come stringa
+                        if (valoreProprieta != null && valoreProprieta.Contains(values[z]))
+                        {
+                            opereTemp.Add(operes[i]);
+                        }
+                    }
+                    if(opereTemp.Count > 0)
+                    {
+                        operes.Clear();
+                        operes.AddRange(opereTemp);
+                        opereTemp.Clear();
+                    }
+
                 }
+                else
+                {
+                    for (int i = 0; i < opere.Count; i++)
+                    {
+                        var tipo = opere[i].GetType();  // Ottieni il tipo dell'oggetto
+                        var proprieta = tipo.GetProperty(checkedItems[z]);  // Ottieni la proprietà
+                        var valoreProprieta = proprieta.GetValue(opere[i])?.ToString();  // Ottieni il valore della proprietà come stringa
+                        if (valoreProprieta != null && valoreProprieta.Contains(values[z]))
+                        {
+                            operes.Add(opere[i]);
+                        }
+                    }
+                }
+                
             }
+           
 
             if (operes.Count == 0)
             {
@@ -287,8 +234,5 @@ namespace OpereDarteConservateNeiMuseiInLombardia
 
             return result;
         }
-
-        
-
     }
 }
