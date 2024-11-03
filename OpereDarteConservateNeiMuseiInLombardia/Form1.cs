@@ -95,6 +95,8 @@ namespace OpereDarteConservateNeiMuseiInLombardia
                 string url = catalogo.opere[risultato].Url;
                 webBrowser.Navigate(url);
                 webBrowser.Visible = true;
+                gmap.Visible = false;
+                grigliaOpere.Visible = false;
             }
             else
             {
