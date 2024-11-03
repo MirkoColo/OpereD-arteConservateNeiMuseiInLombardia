@@ -84,52 +84,52 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         }
 
         // RICERCHE
-        public int CercaOperaPerID()
+        public int CercaOperaPerID(List<Opera> opereCurr)
         {
             string id = ShowInputBox("Inserisci l'ID dell'opera", "Inserimento ID opera", "");
-            int risultato = Ricerca(id, "Idk");
+            int risultato = Ricerca(id, "Idk", opereCurr);
 
             return risultato;
         }
 
 
-        public List<Opera> CercaOperaPerDescrizione()
+        public List<Opera> CercaOperaPerDescrizione(List<Opera> opereCurr)
         {
             string descrizione = ShowInputBox("Inserisci la descrizione dell'opera", "Inserimento descrizione opera", "");
 
-            return Ricercas(descrizione, "Deso");
+            return Ricercas(descrizione, "Deso", opereCurr);
         }
 
-        public List<Opera> CercaOperaPerSoggetto()
+        public List<Opera> CercaOperaPerSoggetto(List<Opera> opereCurr)
         {
             string soggetto = ShowInputBox("Inserisci il soggetto dell'opera", "Inserimento soggetto opera", "");
 
-            return Ricercas(soggetto, "Sgti");
+            return Ricercas(soggetto, "Sgti", opereCurr);
         }
 
-        public int CercaImmagine()
+        public int CercaImmagine(List<Opera> opereCurr)
         {
             string opera = ShowInputBox("Inserisci l'ID dell'opera", "Inserimento ID", "");
-            int risultato = Ricerca(opera, "Idk");
+            int risultato = Ricerca(opera, "Idk", opereCurr);
 
             return risultato;
         }
 
-        public int CercaMuseo()
+        public int CercaMuseo(List<Opera> opereCurr)
         {
             string museo = ShowInputBox("Inserisci il nome del museo", "Inserimento museo", "");
-            int risultato = Ricerca(museo, "Ldcm");
+            int risultato = Ricerca(museo, "Ldcm", opereCurr);
 
             return risultato;
         }
-        public int Ricerca(string opera, string sigla)
+        public int Ricerca(string opera, string sigla, List<Opera> opereCurr)
         {
             int i;
-            for (i = 0; i < opere.Count; i++)
+            for (i = 0; i < opereCurr.Count; i++)
             {
-                var tipo = opere[i].GetType();  // Ottieni il tipo dell'oggetto
+                var tipo = opereCurr[i].GetType();  // Ottieni il tipo dell'oggetto
                 var proprieta = tipo.GetProperty(sigla);  // Ottieni la proprietà
-                var valoreProprieta = proprieta.GetValue(opere[i])?.ToString();  // Ottieni il valore della proprietà come stringa
+                var valoreProprieta = proprieta.GetValue(opereCurr[i])?.ToString();  // Ottieni il valore della proprietà come stringa
                 if (valoreProprieta == opera)
                 {
                     return i;
@@ -139,16 +139,16 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             return -1;
         }
 
-        public List<Opera> Ricercas(string opera, string sigla)
+        public List<Opera> Ricercas(string opera, string sigla, List<Opera> opereCurr)
         { 
             List<Opera> operes = new List<Opera>();
             if (opera.Trim() != "")
             {
-                for (int i = 0; i < opere.Count; i++)
+                for (int i = 0; i < opereCurr.Count; i++)
                 {
-                    var tipo = opere[i].GetType();  // Ottieni il tipo dell'oggetto
+                    var tipo = opereCurr[i].GetType();  // Ottieni il tipo dell'oggetto
                     var proprieta = tipo.GetProperty(sigla);  // Ottieni la proprietà
-                    var valoreProprieta = proprieta.GetValue(opere[i])?.ToString();  // Ottieni il valore della proprietà come stringa
+                    var valoreProprieta = proprieta.GetValue(opereCurr[i])?.ToString();  // Ottieni il valore della proprietà come stringa
                     if (valoreProprieta != null && valoreProprieta.Contains(opera))
                     {
                         operes.Add(opere[i]);  // Aggiungi l'indice dell'opera trovata
@@ -161,7 +161,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             return opere;
         }
 
-        public List<Opera> FiltroDinamico(List<string> values, List<string> checkedItems)
+        public List<Opera> FiltroDinamico(List<string> values, List<string> checkedItems, List<Opera> opereCurr)
         {
             List<Opera> operes = new List<Opera>();
             List<Opera> opereTemp = new List<Opera>();
@@ -191,14 +191,14 @@ namespace OpereDarteConservateNeiMuseiInLombardia
                 }
                 else
                 {
-                    for (int i = 0; i < opere.Count; i++)
+                    for (int i = 0; i < opereCurr.Count; i++)
                     {
-                        var tipo = opere[i].GetType();  // Ottieni il tipo dell'oggetto
+                        var tipo = opereCurr[i].GetType();  // Ottieni il tipo dell'oggetto
                         var proprieta = tipo.GetProperty(checkedItems[z]);  // Ottieni la proprietà
-                        var valoreProprieta = proprieta.GetValue(opere[i])?.ToString();  // Ottieni il valore della proprietà come stringa
+                        var valoreProprieta = proprieta.GetValue(opereCurr[i])?.ToString();  // Ottieni il valore della proprietà come stringa
                         if (valoreProprieta != null && valoreProprieta.Contains(values[z]))
                         {
-                            operes.Add(opere[i]);
+                            operes.Add(opereCurr[i]);
                         }
                     }
                 }

@@ -61,10 +61,10 @@ namespace OpereDarteConservateNeiMuseiInLombardia
 
         private void btn_cercaOperaPerID_Click(object sender, EventArgs e)
         {
-            int risultato = catalogo.CercaOperaPerID();
+            int risultato = catalogo.CercaOperaPerID((List<Opera>)grigliaOpere.DataSource);
             if (risultato != -1)
             {
-                MessageBox.Show("Opera trovata all'indice: " + risultato);
+                //MessageBox.Show("Opera trovata all'indice: " + risultato);
                 grigliaOpere.ClearSelection();
                 grigliaOpere.Rows[risultato].Selected = true;
                 grigliaOpere.FirstDisplayedScrollingRowIndex = risultato;
@@ -77,22 +77,22 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         }
         private void btn_CercaOperaPerDescrizione_Click(object sender, EventArgs e)
         {
-            grigliaOpere.DataSource = catalogo.CercaOperaPerDescrizione();
+            grigliaOpere.DataSource = catalogo.CercaOperaPerDescrizione((List<Opera>)grigliaOpere.DataSource);
             MostraGriglia();
         }
 
         private void btn_cercaOperaPerSoggetto_Click(object sender, EventArgs e)
         {
-            grigliaOpere.DataSource = catalogo.CercaOperaPerSoggetto();
+            grigliaOpere.DataSource = catalogo.CercaOperaPerSoggetto((List<Opera>)grigliaOpere.DataSource);
             MostraGriglia();
         }
 
         private void btn_cercaImmagine_Click(object sender, EventArgs e)
         {
-            int risultato = catalogo.CercaImmagine();
+            int risultato = catalogo.CercaImmagine((List<Opera>)grigliaOpere.DataSource);
             if (risultato != -1)
             {
-                string url = catalogo.opere[risultato].Url;
+                string url = ((List<Opera>)grigliaOpere.DataSource)[risultato].Url;
                 webBrowser.Navigate(url);
                 webBrowser.Visible = true;
                 gmap.Visible = false;
@@ -272,11 +272,11 @@ namespace OpereDarteConservateNeiMuseiInLombardia
 
         private void btn_cercaMuseo_Click(object sender, EventArgs e)
         {
-            int risultato = catalogo.CercaMuseo();
+            int risultato = catalogo.CercaMuseo((List<Opera>)grigliaOpere.DataSource);
             if (risultato != -1)
             {
                 //MessageBox.Show("Opera trovata all'indice: " + risultato);
-                gmap.Position = ConvertiCoordinate(catalogo.opere[risultato].Location);
+                gmap.Position = ConvertiCoordinate(((List<Opera>)grigliaOpere.DataSource)[risultato].Location);
                 gmap.Zoom = 18;
                 gmap.Visible = true;
                 grigliaOpere.Visible = false;
@@ -345,7 +345,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
                 case "Ldcm":
                     return "Nome del museo o dell'ente che ospita l'opera";
                 case "Cold":
-                    return "Condizioni di conservazione dell'opera";
+                    return "Collezione dell'opera";
                 case "Dtzg":
                     return "Datazione dell'opera (secolo)";
                 case "Dtsi":
@@ -390,8 +390,8 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         public void riempiListaPerFiltro()
         {
             // Riempimento della CheckedListBox con gli attributi della classe Opera
-            listaFiltroDin.Items.Add("Grp:Gruppo di opere d'arte (categoria)");
-            listaFiltroDin.Items.Add("Ogtd:Tipo di opera (es. dipinto, scultura)");
+            listaFiltroDin.Items.Add("Grp:Gruppo di opere d'arte");
+            listaFiltroDin.Items.Add("Ogtd:Tipo di opera");
             listaFiltroDin.Items.Add("Pvcp:Sigla provincia");
             listaFiltroDin.Items.Add("Pvcn:Provincia di origine");
             listaFiltroDin.Items.Add("Pvcc:comune di origine");
@@ -400,7 +400,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             listaFiltroDin.Items.Add("Ldcn:Nome dell'edificio");
             listaFiltroDin.Items.Add("Ldcu:Indirizzo dell'edificio");
             listaFiltroDin.Items.Add("Ldcm:Nome del museo o dell'ente che ospita l'opera");
-            listaFiltroDin.Items.Add("Cold:Condizioni di conservazione dell'opera");
+            listaFiltroDin.Items.Add("Cold:Collezione dell'opera");
             listaFiltroDin.Items.Add("Dtzg:Datazione dell'opera (secolo)");
             listaFiltroDin.Items.Add("Dtsi:Anno di creazione dell'opera");
             listaFiltroDin.Items.Add("Autn:Nome dell'autore dell'opera");
@@ -423,7 +423,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
                 values.Add(input);
                 checkedItems.Add(item.ToString().Split(':')[0]);
             }
-            grigliaOpere.DataSource = catalogo.FiltroDinamico(values,checkedItems);
+            grigliaOpere.DataSource = catalogo.FiltroDinamico(values,checkedItems, (List<Opera>)grigliaOpere.DataSource);
             MostraGriglia();
         }
         public string ShowInputBox(string prompt, string title = "Input", string defaultValue = "")
