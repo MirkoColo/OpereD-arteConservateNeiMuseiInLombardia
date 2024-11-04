@@ -13,6 +13,7 @@ using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms;
 using GMap.NET;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace OpereDarteConservateNeiMuseiInLombardia
 {
@@ -30,7 +31,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             this.KeyPreview = true;
             riempiListaPerFiltro();
         }
-       
+
         private void Form1_Load(object sender, EventArgs e)
         {
             catalogo.LeggiFile();
@@ -42,6 +43,8 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             webBrowser.Visible = false;
             pnl_listBox.Visible = false;
             InitializeMap();
+            riempiCombo();
+            ContaOpere();
         }
 
         private void grigliaOpere_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -79,12 +82,14 @@ namespace OpereDarteConservateNeiMuseiInLombardia
         {
             grigliaOpere.DataSource = catalogo.CercaOperaPerDescrizione((List<Opera>)grigliaOpere.DataSource);
             MostraGriglia();
+            ContaOpere();
         }
 
         private void btn_cercaOperaPerSoggetto_Click(object sender, EventArgs e)
         {
             grigliaOpere.DataSource = catalogo.CercaOperaPerSoggetto((List<Opera>)grigliaOpere.DataSource);
             MostraGriglia();
+            ContaOpere();
         }
 
         private void btn_cercaImmagine_Click(object sender, EventArgs e)
@@ -128,6 +133,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             gmap.Visible = false;
             webBrowser.Visible = false;
             grigliaOpere.Visible = true;
+            ContaOpere();
 
         }
 
@@ -168,7 +174,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
                 this.TopMost = true;  // Porta la finestra in primo piano
                 isFullScreen = true;
             }
-        }   
+        }
 
         private void InitializeMap()
         {
@@ -199,9 +205,9 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             HashSet<string> locationUniche = new HashSet<string>();
             List<Opera> catalogoSenzaDuplicati = new List<Opera>();
 
-            foreach(var opera in catalogo.opere)
+            foreach (var opera in catalogo.opere)
             {
-                if(locationUniche.Add(opera.Location))
+                if (locationUniche.Add(opera.Location))
                 {
                     catalogoSenzaDuplicati.Add(opera);
                 }
@@ -245,8 +251,8 @@ namespace OpereDarteConservateNeiMuseiInLombardia
 
         private void btn_mappa_Click(object sender, EventArgs e)
         {
-            
-            if(gmap.Visible)
+
+            if (gmap.Visible)
             {
                 gmap.Visible = false;
                 webBrowser.Visible = false;
@@ -262,7 +268,7 @@ namespace OpereDarteConservateNeiMuseiInLombardia
 
         public void MostraGriglia()
         {
-            if(gmap.Visible == true || webBrowser.Visible == true)
+            if (gmap.Visible == true || webBrowser.Visible == true)
             {
                 gmap.Visible = false;
                 webBrowser.Visible = false;
@@ -423,8 +429,9 @@ namespace OpereDarteConservateNeiMuseiInLombardia
                 values.Add(input);
                 checkedItems.Add(item.ToString().Split(':')[0]);
             }
-            grigliaOpere.DataSource = catalogo.FiltroDinamico(values,checkedItems, (List<Opera>)grigliaOpere.DataSource);
+            grigliaOpere.DataSource = catalogo.FiltroDinamico(values, checkedItems, (List<Opera>)grigliaOpere.DataSource);
             MostraGriglia();
+            ContaOpere();
         }
         public string ShowInputBox(string prompt, string title = "Input", string defaultValue = "")
         {
@@ -441,6 +448,226 @@ namespace OpereDarteConservateNeiMuseiInLombardia
             return result;
         }
 
-        
+        public void riempiCombo()
+        {
+            comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            // Aggiungi le sigle con la descrizione
+            comboBox.Items.Add("Idk: Identificativo unico dell'opera");
+            comboBox.Items.Add("Esc: Ente o museo che ospita l'opera");
+            comboBox.Items.Add("Grp: Gruppo di opere d'arte");
+            comboBox.Items.Add("Ogtd: Tipo di opera");
+            comboBox.Items.Add("Sgti: Soggetto dell'opera");
+            comboBox.Items.Add("Pvcp: Sigla provincia");
+            comboBox.Items.Add("Pvcn: Provincia di origine");
+            comboBox.Items.Add("Pvcc: Comune di origine");
+            comboBox.Items.Add("Ldct: Tipo di edificio dove si trova l'opera");
+            comboBox.Items.Add("Ldcq: Tipo di ente o ente pubblico");
+            comboBox.Items.Add("Ldcn: Nome dell'edificio");
+            comboBox.Items.Add("Ldcu: Indirizzo dell'edificio");
+            comboBox.Items.Add("Ldcm: Nome del museo o dell'ente che ospita l'opera");
+            comboBox.Items.Add("Cold: Condizioni di conservazione dell'opera");
+            comboBox.Items.Add("Dtsi: Anno di creazione dell'opera");
+            comboBox.Items.Add("Autn: Nome dell'autore dell'opera");
+            comboBox.Items.Add("Atbd: Categoria");
+            comboBox.Items.Add("Mtc: Materiale utilizzato per l'opera");
+            comboBox.Items.Add("Stcc: Stato di conservazione");
+            comboBox.Items.Add("Cdgg: Proprietà dell'opera");
+            comboBox.Items.Add("Fur: Nome del fornitore");
+
+            comboBox.SelectedIndex = 0;
+        }
+
+        private void btn_crescente_Click(object sender, EventArgs e)
+        {
+            string selectedSigla = comboBox.SelectedItem.ToString().Split(':')[0].Trim();
+            if (isSiglaValida(selectedSigla))
+            {
+                grigliaOpere.DataSource = Crescente((List<Opera>)grigliaOpere.DataSource, selectedSigla);
+            }
+            else
+            {
+                MessageBox.Show("Selezionare una sigla corretta");
+            }
+        }
+
+        private List<Opera> Crescente(List<Opera> dataSource, string selectedSigla)
+        {
+            List<Opera> sortedList = null;
+
+            switch (selectedSigla)
+            {
+                case "Idk":
+                    sortedList = dataSource.OrderBy(opera => opera.Idk).ToList();
+                    break;
+                case "Esc":
+                    sortedList = dataSource.OrderBy(opera => opera.Esc).ToList();
+                    break;
+                case "Grp":
+                    sortedList = dataSource.OrderBy(opera => opera.Grp).ToList();
+                    break;
+                case "Ogtd":
+                    sortedList = dataSource.OrderBy(opera => opera.Ogtd).ToList();
+                    break;
+                case "Sgti":
+                    sortedList = dataSource.OrderBy(opera => opera.Sgti).ToList();
+                    break;
+                case "Pvcp":
+                    sortedList = dataSource.OrderBy(opera => opera.Pvcp).ToList();
+                    break;
+                case "Pvcn":
+                    sortedList = dataSource.OrderBy(opera => opera.Pvcn).ToList();
+                    break;
+                case "Pvcc":
+                    sortedList = dataSource.OrderBy(opera => opera.Pvcc).ToList();
+                    break;
+                case "Ldct":
+                    sortedList = dataSource.OrderBy(opera => opera.Ldct).ToList();
+                    break;
+                case "Ldcq":
+                    sortedList = dataSource.OrderBy(opera => opera.Ldcq).ToList();
+                    break;
+                case "Ldcn":
+                    sortedList = dataSource.OrderBy(opera => opera.Ldcn).ToList();
+                    break;
+                case "Ldcu":
+                    sortedList = dataSource.OrderBy(opera => opera.Ldcu).ToList();
+                    break;
+                case "Ldcm":
+                    sortedList = dataSource.OrderBy(opera => opera.Ldcm).ToList();
+                    break;
+                case "Cold":
+                    sortedList = dataSource.OrderBy(opera => opera.Cold).ToList();
+                    break;
+                case "Dtsi":
+                    sortedList = dataSource.OrderBy(opera => opera.Dtsi).ToList();
+                    break;
+                case "Autn":
+                    sortedList = dataSource.OrderBy(opera => opera.Autn).ToList();
+                    break;
+                case "Atbd":
+                    sortedList = dataSource.OrderBy(opera => opera.Atbd).ToList();
+                    break;
+                case "Mtc":
+                    sortedList = dataSource.OrderBy(opera => opera.Mtc).ToList();
+                    break;
+                case "Stcc":
+                    sortedList = dataSource.OrderBy(opera => opera.Stcc).ToList();
+                    break;
+                case "Cdgg":
+                    sortedList = dataSource.OrderBy(opera => opera.Cdgg).ToList();
+                    break;
+                case "Fur":
+                    sortedList = dataSource.OrderBy(opera => opera.Fur).ToList();
+                    break;
+                default:
+                    break;
+            }
+            return sortedList;
+        }
+
+        private void btn_decrescente_Click(object sender, EventArgs e)
+        {
+            string selectedSigla = comboBox.SelectedItem.ToString().Split(':')[0].Trim();
+            if (isSiglaValida(selectedSigla))
+            {
+                grigliaOpere.DataSource = Decrescente((List<Opera>)grigliaOpere.DataSource, selectedSigla);
+            }
+            else
+            {
+                MessageBox.Show("Selezionare una sigla corretta");
+            }
+        }
+
+        private List<Opera> Decrescente(List<Opera> dataSource, string selectedSigla)
+        {
+            List<Opera> sortedList = null;
+
+            switch (selectedSigla)
+            {
+                case "Idk":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Idk).ToList();
+                    break;
+                case "Esc":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Esc).ToList();
+                    break;
+                case "Grp":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Grp).ToList();
+                    break;
+                case "Ogtd":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Ogtd).ToList();
+                    break;
+                case "Sgti":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Sgti).ToList();
+                    break;
+                case "Pvcp":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Pvcp).ToList();
+                    break;
+                case "Pvcn":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Pvcn).ToList();
+                    break;
+                case "Pvcc":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Pvcc).ToList();
+                    break;
+                case "Ldct":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Ldct).ToList();
+                    break;
+                case "Ldcq":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Ldcq).ToList();
+                    break;
+                case "Ldcn":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Ldcn).ToList();
+                    break;
+                case "Ldcu":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Ldcu).ToList();
+                    break;
+                case "Ldcm":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Ldcm).ToList();
+                    break;
+                case "Cold":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Cold).ToList();
+                    break;
+                case "Dtsi":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Dtsi).ToList();
+                    break;
+                case "Autn":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Autn).ToList();
+                    break;
+                case "Atbd":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Atbd).ToList();
+                    break;
+                case "Mtc":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Mtc).ToList();
+                    break;
+                case "Stcc":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Stcc).ToList();
+                    break;
+                case "Cdgg":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Cdgg).ToList();
+                    break;
+                case "Fur":
+                    sortedList = dataSource.OrderByDescending(opera => opera.Fur).ToList();
+                    break;
+                default:
+                    break;
+            }
+            return sortedList;
+        }
+
+        private bool isSiglaValida(string sigla)
+        {
+ 
+            string[] validSigle = new string[] { "Idk", "Esc", "Grp", "Ogtd", "Sgti", "Pvcp", "Pvcn", "Pvcc", "Ldct",
+                                           "Ldcq", "Ldcn", "Ldcu", "Ldcm", "Dtsi", "Autn",
+                                           "Atbd", "Mtc", "Stcc", "Cdgg", "Fur" };
+
+            return validSigle.Contains(sigla);
+
+        }
+
+        public void ContaOpere()
+        {
+            labelOpere.Text = "Numero opere: " + ((List<Opera>)grigliaOpere.DataSource).Count;
+        }
     }
 }

@@ -46,6 +46,11 @@
             this.btn_applicaFiltri = new System.Windows.Forms.Button();
             this.listaFiltroDin = new System.Windows.Forms.CheckedListBox();
             this.btn_cercaOperaPerSoggetto = new System.Windows.Forms.Button();
+            this.comboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_crescente = new System.Windows.Forms.Button();
+            this.btn_decrescente = new System.Windows.Forms.Button();
+            this.labelOpere = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grigliaOpere)).BeginInit();
             this.pnl_listBox.SuspendLayout();
             this.SuspendLayout();
@@ -212,7 +217,7 @@
             this.pnl_listBox.Controls.Add(this.listaFiltroDin);
             this.pnl_listBox.Location = new System.Drawing.Point(30, 72);
             this.pnl_listBox.Name = "pnl_listBox";
-            this.pnl_listBox.Size = new System.Drawing.Size(388, 867);
+            this.pnl_listBox.Size = new System.Drawing.Size(388, 448);
             this.pnl_listBox.TabIndex = 19;
             // 
             // btn_applicaFiltri
@@ -244,6 +249,56 @@
             this.btn_cercaOperaPerSoggetto.UseVisualStyleBackColor = true;
             this.btn_cercaOperaPerSoggetto.Click += new System.EventHandler(this.btn_cercaOperaPerSoggetto_Click);
             // 
+            // comboBox
+            // 
+            this.comboBox.FormattingEnabled = true;
+            this.comboBox.Location = new System.Drawing.Point(101, 634);
+            this.comboBox.Name = "comboBox";
+            this.comboBox.Size = new System.Drawing.Size(232, 24);
+            this.comboBox.TabIndex = 21;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(132, 592);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(164, 29);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Ordinamento";
+            // 
+            // btn_crescente
+            // 
+            this.btn_crescente.Location = new System.Drawing.Point(90, 676);
+            this.btn_crescente.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_crescente.Name = "btn_crescente";
+            this.btn_crescente.Size = new System.Drawing.Size(120, 49);
+            this.btn_crescente.TabIndex = 23;
+            this.btn_crescente.Text = "Crescente";
+            this.btn_crescente.UseVisualStyleBackColor = true;
+            this.btn_crescente.Click += new System.EventHandler(this.btn_crescente_Click);
+            // 
+            // btn_decrescente
+            // 
+            this.btn_decrescente.Location = new System.Drawing.Point(226, 676);
+            this.btn_decrescente.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_decrescente.Name = "btn_decrescente";
+            this.btn_decrescente.Size = new System.Drawing.Size(120, 49);
+            this.btn_decrescente.TabIndex = 24;
+            this.btn_decrescente.Text = "Decrescente";
+            this.btn_decrescente.UseVisualStyleBackColor = true;
+            this.btn_decrescente.Click += new System.EventHandler(this.btn_decrescente_Click);
+            // 
+            // labelOpere
+            // 
+            this.labelOpere.AutoSize = true;
+            this.labelOpere.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelOpere.Location = new System.Drawing.Point(119, 546);
+            this.labelOpere.Name = "labelOpere";
+            this.labelOpere.Size = new System.Drawing.Size(56, 20);
+            this.labelOpere.TabIndex = 25;
+            this.labelOpere.Text = "opere";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -251,6 +306,11 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(51)))));
             this.ClientSize = new System.Drawing.Size(1924, 1055);
+            this.Controls.Add(this.labelOpere);
+            this.Controls.Add(this.btn_decrescente);
+            this.Controls.Add(this.btn_crescente);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBox);
             this.Controls.Add(this.pnl_listBox);
             this.Controls.Add(this.btn_filtroDinamico);
             this.Controls.Add(this.btn_mostraBrowser);
@@ -274,6 +334,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.grigliaOpere)).EndInit();
             this.pnl_listBox.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -297,6 +358,11 @@
         private System.Windows.Forms.CheckedListBox listaFiltroDin;
         private System.Windows.Forms.Button btn_applicaFiltri;
         private System.Windows.Forms.Button btn_cercaOperaPerSoggetto;
+        private System.Windows.Forms.ComboBox comboBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btn_crescente;
+        private System.Windows.Forms.Button btn_decrescente;
+        private System.Windows.Forms.Label labelOpere;
     }
 }
 
