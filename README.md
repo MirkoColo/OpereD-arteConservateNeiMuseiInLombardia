@@ -6,6 +6,7 @@
   1. Ricerche: ID, descrizione, soggetto, immagine, museo sulla mappa ed eventi.
   2. Filtri: tipologia, secolo, museo, gruppo, comune, provincia, tipo di edificio, autore, stato di conservazione, materiale, ente, proprietà e fornitore.
   3. Si possono visualizzare i musei su una mappa interattiva e si possono cercare eventi relativi ai musei.
+  4. È possibile inoltre ordinare il catalogo (crescente/decrescente) e visualizzare il numero di opere.
 
 - MODALITÀ D'USO
   1. Premi f per attivare/disattivare la modalità schermo intero
